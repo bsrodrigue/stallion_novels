@@ -27,7 +27,7 @@ SECRET_KEY = '5mr9mp18k9pmmwrxgsr4it=3zaq%2zghg!!&w^l9r=3cwue$#0'
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENV == 'DEV':
     DEBUG = True
-    ALLOWED_HOSTS = ['']
+    ALLOWED_HOSTS = ['*']
 else:
     DEBUG = False
     ALLOWED_HOSTS = ['stallion-novels.herokuapp.com']
@@ -130,8 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = '/static/'
-
+STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
