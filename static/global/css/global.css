@@ -40,6 +40,7 @@ html, body{
 }
 
 
+
 .orange{
     color: #fa7d09;
 }
@@ -128,12 +129,7 @@ section{
 .novel-card-right{
     margin-top: 10px;
     overflow-y: hidden;
-    height: 350px;
 }
-
-/* .novel-card-right:hover{
-    overflow-y: scroll;
-} */
 
 .novel-card-cover{
     height: 350px;
@@ -141,7 +137,6 @@ section{
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
-
 
 .novel-card-category{
     color: dimgray;
@@ -201,4 +196,24 @@ footer .container{
 
 .footer-link-col{
     margin: 10px;
+}
+
+@media(max-width: 992px){
+    .novel-card-description, .novel-card-author{
+        display: none;
+     }
+}
+
+@media(max-width: 768px){
+    .novel-card-cover{
+        height: 275px;
+    }
+
+    .footer-content{
+        flex-direction: column-reverse;
+    }
+
+    footer{
+        height: 350px;
+    }
 }
