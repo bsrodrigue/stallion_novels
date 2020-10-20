@@ -1,0 +1,1 @@
+web: gunicorn stallion_novels.wsgi
