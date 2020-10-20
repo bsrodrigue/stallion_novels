@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/global.css' %}">
+    <title> {{ page_title }} </title>
+</head>
+
+<body>
+    <!-- Header & Navbar -->
+    {% include 'global/blocks/header.html' %}
+    
+
+    <!-- Hero -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1> {{ page_hero_title }} </h1>
+            <p> {{ page_hero_description }} </p>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class=" {% block active_container %}{% endblock active_container %} ">
+       {% block content %}
+       {% endblock content %}
+    </div>
+
+    <!-- Footer -->
+    {% include 'global/blocks/footer.html' %}
+
+
+    <script src="{% static 'global/js/jquery.min.js' %}"></script>
+    <script src="{% static 'global/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'global/js/script.js' %}"></script>
+</body>
+
+</html>

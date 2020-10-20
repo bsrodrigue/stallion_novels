@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+:root{
+    --main-color: #2f2519;
+    --secondary-color: #fa7d09;
+}
+
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body{
+    overflow-x: hidden;
+    background: #4a3f35;
+}
+
+/*Scrollbar*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    background: #2f2519;
+    border-radius: 25px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#fa7d09;
+    border-radius: 25px;
+    height: 10px;
+    width: 10px;
+}
+
+@media (min-width: 1200px){
+.container{
+    max-width: 960px;
+}
+}
+
+
+.orange{
+    color: #fa7d09;
+}
+
+.navbar{
+    background: var(--main-color) !important;
+}
+
+.navbar .dropdown *{
+    background: var(--main-color) !important;
+}
+
+.navbar *{
+    font-family: 'Quicksand', sans-serif !important;
+    color: white !important;
+}
+
+.navbar-brand{
+    font-weight: bold;
+}
+
+.dropdown-item{
+    transition: all 0.6s ease-out;
+}
+
+.dropdown-item:hover{
+    background: #ff4301 !important;
+    transition: all 0.6s ease-out;
+}
+
+.search-bar-input{
+    border:none!important;
+    border-radius: 15px !important;
+    font-weight: bold;
+    color: #2f2519 !important;
+}
+
+.search-bar-submit{
+    border: 2px solid #fa7d09 !important;
+    border-radius: 15px !important;
+    font-weight: bold;
+}
+
+.search-bar-submit:hover{
+    background: #fa7d09 !important;
+}
+
+.jumbotron{
+    background: #fa7d09 !important;
+    border-radius: 0px 0px 10px 10px !important;
+}
+
+.jumbotron *{
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+}
+
+section{
+    margin: 20px 0px;
+}
+
+
+.section-title{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    color: white;
+}
+
+.underbar{
+    background: var(--secondary-color);
+    height: 5px;
+    width: 250px;
+    border-radius: 25px;
+    margin-bottom: 15px;
+}
+
+.novel-card{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.novel-card-right{
+    margin-top: 10px;
+    overflow-y: hidden;
+    height: 350px;
+}
+
+/* .novel-card-right:hover{
+    overflow-y: scroll;
+} */
+
+.novel-card-cover{
+    height: 350px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+.novel-card-category{
+    color: dimgray;
+    font-weight: bold;
+}
+
+.novel-card-title{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color:#2f2519;
+}
+
+.novel-card-title:hover{
+    color: #fa7d09;
+    text-decoration: none;
+}
+
+.novel-card-description{
+    color: dimgray;
+    font-size: 14px;
+}
+
+footer{
+    background: #2f2519;
+    height: 300px;
+}
+
+footer *{
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+}
+
+footer .container{
+    height: 100%;
+}
+
+.footer-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.footer-brand{
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer-links{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.footer-link-col{
+    margin: 10px;
+}
