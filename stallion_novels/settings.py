@@ -14,6 +14,7 @@ from pathlib import Path
 
 
 ENV = os.getenv('ENV')
+DBX_TOKEN = os.getenv('DROPBOX_OAUTH2_TOKEN')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +33,7 @@ if ENV == 'DEV':
 else:
     DEBUG = False
     ALLOWED_HOSTS = ['stallion-novels.herokuapp.com']
+    DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 
 
 
@@ -141,3 +143,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DROPBOX_OAUTH2_TOKEN = DBX_TOKEN
