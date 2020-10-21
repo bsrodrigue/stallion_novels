@@ -1,3 +1,16 @@
 {
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "sqltools.connections": [
+        {
+            "database": "stallion_db",
+            "driver": "PostgreSQL",
+            "group": "dev_databases",
+            "name": "stallion_dev",
+            "password": "geoflexis",
+            "port": 5432,
+            "previewLimit": 50,
+            "server": "localhost",
+            "username": "stallion"
+        }
+    ]
 }
