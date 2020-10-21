@@ -127,7 +127,7 @@
 
     {
         "model": "novels.chapter",
-        "pk": 3,
+        "pk": 4,
         "fields": {
             "title": "Discovery in the new world",
             "content": "A good story sure...",
@@ -141,7 +141,7 @@
 
     {
         "model": "novels.chapter",
-        "pk": 3,
+        "pk": 5,
         "fields": {
             "title": "The god of Sparta",
             "content": "A good story sure...",
@@ -155,7 +155,7 @@
 
     {
         "model": "novels.chapter",
-        "pk": 3,
+        "pk": 6,
         "fields": {
             "title": "A new comrade",
             "content": "A good story sure...",
