@@ -1,0 +1,34 @@
+.novel-chapter-list{
+    height: 500px;
+    overflow-y: scroll;
+    padding: 20px 0px;
+}
+
+.novel-chapter-list::-webkit-scrollbar{
+    display: none;
+}
+
+.novel-chapter-li-title{
+    color: #2f2519;
+    transition: all 0.5s ease;
+}
+
+.novel-chapter-li-title:hover{
+    color: #ff4301;
+    margin-left: 20px;
+    transition: all 0.5s ease;
+}
+
+.novel-chapter-li-date{
+    color: dimgray;
+    font-size: 12px;
+    margin: 5px 0px;
+}
+
+.novel-cover{
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+    object-position: 0px 0px;
+    border-radius: 10px;
+}

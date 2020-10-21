@@ -1,0 +1,35 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block additional_stylesheets %}
+<link rel="stylesheet" href="{% static 'novels/css/novel.css' %}">
+{% endblock additional_stylesheets %}
+{% block active_container %}container{% endblock active_container %}
+{% block content %}
+<!-- New Novels -->
+<section>
+    <h1 class="section-title">Chapitres</h1>
+    <div class="section-title-underbar underbar"></div>
+    <div class="section-content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="novel-chapter-list">
+                    {% if chapters %}
+                        {% for chapter in chapters %}
+                            <div class="novel-chapter-li">
+                                <a href=" {% url 'chapter' novel.id chapter.id %} " class="novel-chapter-li-title"> Chapitre {{ forloop.counter }}: {{ chapter.title }} </a>
+                                <p class="novel-chapter-li-date"> publié: {{ chapter.created_at }} </p>
+                            </div >
+                            <hr/>
+                        {% endfor %}
+                    {% else %}
+                    <h5>Pas de chapitres disponibles</h5>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img class="novel-cover" src=" {{ novel.cover.url }} " alt="">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

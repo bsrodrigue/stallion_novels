@@ -2,7 +2,7 @@
 <div class="novel-card">
         <img class="novel-card-cover" src=" {{ novel.cover.url }} " alt="">
         <div class="novel-card-text">
-            <a href=" {% url 'chapter' novel.id 0 %} " class="novel-card-title">{{ novel.title }}</a>
+            <a href=" {% url 'novel' novel.id %} " class="novel-card-title">{{ novel.title }}</a>
             <p class="novel-card-category"> {{ novel.category }} </p>
         </div>
 </div>

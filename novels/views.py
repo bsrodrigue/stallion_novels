@@ -54,3 +54,20 @@ def chapter(request, novel_id, chapter_id):
             "page_hero_description": f"",
         },
     )
+
+
+def novel(request, novel_id):
+    novel = Novel.objects.get(pk=novel_id)
+    chapters = Chapter.objects.filter(novel=novel_id)
+
+    return render(
+        request,
+        "novels/novel.html",
+        {
+            "page_title": f"{novel.title}",
+            "novel": novel,
+            "chapters": chapters,
+            "page_hero_title": f"{novel.title}",
+            "page_hero_description": f"{novel.description}",
+        },
+    )
