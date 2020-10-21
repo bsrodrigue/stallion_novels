@@ -1,0 +1,8 @@
+<div class="row">
+    {% for novel in latest_novels %}
+    <!-- Novel -->
+    <div class="col-md-2">
+        {% include 'novels/blocks/novel_card.html' %}
+    </div>
+    {% endfor %}
+</div>
