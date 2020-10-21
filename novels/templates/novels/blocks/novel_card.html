@@ -15,7 +15,7 @@
                         <p style="color: #ff4301; font-weight:bold">18+</p>
                         {% endif %}
                     </div>
-                    <a href="/" class="novel-card-title">{{ novel.title }}</a>
+                    <a href=" {% url 'chapter' novel.id 0 %} " class="novel-card-title">{{ novel.title }}</a>
                     <p class="novel-card-author">BADINI Bandard</p>
                     <p class="novel-card-description">
                         {{ novel.description|truncatewords:50 }}

@@ -37,6 +37,10 @@ class Novel(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def has_chapters(self):
+        chapters = Chapter.objects.filter(novel=self)
+        return len(chapters)
+
     def __str__(self):
         return self.title
 

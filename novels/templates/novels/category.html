@@ -9,12 +9,14 @@
             {% if category_novels %}
             <div class="row">
                     {% for novel in category_novels %}
+                        {% if novel.has_chapters %}
                         <!-- Novel -->
-                    <div class="col-md-6 col-6">
-                       {% include 'novels/blocks/novel_card.html' %}
-                    </div>
+                            <div class="col-md-6 col-6">
+                            {% include 'novels/blocks/novel_card.html' %}
+                            </div>
+                        {% endif %}
                     {% endfor %}
-                </div>
+            </div>
             {% else %}
             <h1>PAS DE WEBNOVELS</h1>
             {% endif %}
