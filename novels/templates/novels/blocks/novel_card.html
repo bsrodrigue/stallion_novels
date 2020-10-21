@@ -1,29 +1,8 @@
 {% load static %}
 <div class="novel-card">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="novel-card-left">
-                <img class="novel-card-cover" src=" {{ novel.cover.url }} " alt="">
-            </div>
+        <img class="novel-card-cover" src=" {{ novel.cover.url }} " alt="">
+        <div class="novel-card-text">
+            <a href=" {% url 'chapter' novel.id 0 %} " class="novel-card-title">{{ novel.title }}</a>
+            <p class="novel-card-category"> {{ novel.category }} </p>
         </div>
-        <div class="col-lg-6">
-            <div class="novel-card-right">
-                <div class="novel-card-text">
-                    <div style="display: flex; justify-content:space-between">
-                        <p class="novel-card-category"> {{ novel.category }} </p>
-                        {% if novel.adult %}
-                        <p style="color: #ff4301; font-weight:bold">18+</p>
-                        {% endif %}
-                    </div>
-                    <a href=" {% url 'chapter' novel.id 0 %} " class="novel-card-title">{{ novel.title }}</a>
-                    <p class="novel-card-author">BADINI Bandard</p>
-                    <p class="novel-card-description">
-                        {{ novel.description|truncatewords:50 }}
-                    </p>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
 </div>

@@ -13,7 +13,7 @@
 
 html, body{
     overflow-x: hidden;
-    background: #4a3f35;
+    background: white;
 }
 
 /*Scrollbar*/
@@ -36,8 +36,6 @@ html, body{
     max-width: 960px;
 }
 }
-
-
 
 .orange{
     color: #fa7d09;
@@ -105,58 +103,51 @@ section{
 .section-title{
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
-    color: white;
+    color: #4a3f35;
+    font-size: medium;
 }
 
 .underbar{
     background: var(--secondary-color);
     height: 5px;
-    width: 250px;
+    width: 175px;
     border-radius: 25px;
     margin-bottom: 15px;
 }
 
 .novel-card{
-    display: flex;
-    justify-content: space-between;
     margin: 10px 0px;
+    display: flex;
+    flex-direction: column;
     background: white;
     border-radius: 10px;
-    padding: 10px;
-}
-
-.novel-card-right{
-    margin-top: 10px;
-    overflow-y: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .novel-card-cover{
-    height: 350px;
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    height: 175px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.novel-card-text{
+    padding: 5px;
 }
 
 .novel-card-category{
     color: dimgray;
-    font-weight: bold;
+    font-weight: lighter;
 }
 
 .novel-card-title{
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 14px;
     color:#2f2519;
 }
 
 .novel-card-title:hover{
     color: #fa7d09;
     text-decoration: none;
-}
-
-.novel-card-description{
-    color: dimgray;
-    font-size: 14px;
 }
 
 footer{
@@ -190,7 +181,7 @@ footer .container{
 .footer-links{
     display: flex;
     justify-content: space-between;
-    text-align: center;
+    text-align: end;
 }
 
 .footer-link-col{
