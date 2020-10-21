@@ -16,11 +16,11 @@
                                 Catégories
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="./category.html">Fantasy</a>
-                                <a class="dropdown-item" href="./category.html">Aventure</a>
-                                <a class="dropdown-item" href="./category.html">Action</a>
-                                <a class="dropdown-item" href="./category.html">Romance</a>
-                                <a class="dropdown-item" href="./category.html">Humour</a>
+                            {% if categories %}
+                                {% for category in categories %}
+                                <a class="dropdown-item" href="{% url 'category' category.id %} "> {{ category.title }} </a>
+                                {% endfor %}
+                            {% endif %}
                             </div>
                         </li>
                     </ul>
