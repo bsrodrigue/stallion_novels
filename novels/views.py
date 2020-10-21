@@ -20,38 +20,38 @@ def home(request):
 
 def category(request, category_id):
     category = Category.objects.get(pk=category_id)
-    category_novels = Novel.objects.filter(category=category_id).order_by("-created_at")
+    latest_novels = Novel.objects.filter(category=category_id).order_by("-created_at")
     return render(
         request,
         "novels/category.html",
         {
             "page_title": f"Catégorie {category.title}",
-            "category_novels": category_novels,
-            "page_hero_title": f"Catégorie {category.title}",
-            "page_hero_description": f"Catégorie {category.description}",
+            "latest_novels": latest_novels,
+            "page_hero_title": f"{category.title}",
+            "page_hero_description": f"{category.description}",
         },
     )
 
 
 def chapter(request, novel_id, chapter_id):
-    all_chapters = Chapter.objects.filter(novel=novel_id)
-    current_novel = Novel.objects.get(pk=novel_id)
+    novel = Novel.objects.get(pk=novel_id)
+    chapters = Chapter.objects.filter(novel=novel_id)
     
     if int(chapter_id) == 0:
-        current_chapter = all_chapters.order_by('-order')[0]
+        current_chapter = chapters.order_by('-order')[0]
     else:
-        current_chapter = all_chapters.get(pk=chapter_id)
+        current_chapter = chapters.get(pk=chapter_id)
 
     return render(
         request,
         "novels/chapter.html",
         {
             "page_title": f"{current_chapter.title}",
-            "all_chapters": all_chapters,
+            "novel": novel,
+            "chapters": chapters,
             "current_chapter": current_chapter,
-            "current_novel": current_novel,
-            "page_hero_title": f"{current_chapter.title}",
-            "page_hero_description": f"",
+            "page_hero_title": f"Chapitre: {current_chapter.title}",
+            "page_hero_description": f"Bonne lecture",
         },
     )
 

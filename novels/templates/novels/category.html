@@ -3,20 +3,11 @@
 {% block content %}
  <!-- New Novels -->
         <section>
-            <h1 class="section-title">Collection</h1>
+            <h1 class="section-title">Collection {{ page_hero_title }} </h1>
             <div class="section-title-underbar underbar"></div>
             <div class="section-content">
-            {% if category_novels %}
-            <div class="row">
-                    {% for novel in category_novels %}
-                        {% if novel.has_chapters %}
-                        <!-- Novel -->
-                            <div class="col-md-6 col-6">
-                            {% include 'novels/blocks/novel_card.html' %}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-            </div>
+            {% if latest_novels %}
+           {% include 'novels/blocks/novel_cards.html' %}
             {% else %}
             <h1>PAS DE WEBNOVELS</h1>
             {% endif %}
