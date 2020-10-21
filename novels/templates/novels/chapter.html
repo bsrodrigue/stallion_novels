@@ -1,1 +1,34 @@
 {% extends 'global/base.html' %}
+{% load static %}
+{% block additional_stylesheets %}
+<link rel="stylesheet" href="{% static 'novels/css/chapter.css' %}">
+{% endblock additional_stylesheets %}
+
+{% block content %}
+    <div class="row chapter-reader">
+        <div class="col-md-3">
+            <div class="novel-chapters">
+                {% if all_chapters %}
+                    {% for chapter in all_chapters %}
+                        <div style="background: #2f2519;" class="chapter-selector">
+                            <a style="color: white;" href=" {% url 'chapter' current_novel.id chapter.id %} "> {{ chapter.title }} </a>
+                        </div>
+
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chapter-content">
+            {% if current_chapter %}
+                <p> {{ current_chapter.content }} </p>
+            {% endif %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="chapter-comments">
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

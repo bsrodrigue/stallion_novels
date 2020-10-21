@@ -35,6 +35,7 @@ def category(request, category_id):
 
 def chapter(request, novel_id, chapter_id):
     all_chapters = Chapter.objects.filter(novel=novel_id)
+    current_novel = Novel.objects.get(pk=novel_id)
     
     if int(chapter_id) == 0:
         current_chapter = all_chapters.order_by('-order')[0]
@@ -45,9 +46,10 @@ def chapter(request, novel_id, chapter_id):
         request,
         "novels/chapter.html",
         {
-            "page_title": f"Chapitre {current_chapter.title}",
+            "page_title": f"{current_chapter.title}",
             "all_chapters": all_chapters,
             "current_chapter": current_chapter,
+            "current_novel": current_novel,
             "page_hero_title": f"{current_chapter.title}",
             "page_hero_description": f"",
         },

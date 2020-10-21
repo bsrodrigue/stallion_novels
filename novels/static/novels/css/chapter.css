@@ -1,0 +1,22 @@
+.novel-chapters{
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.novel-chapters::-webkit-scrollbar{
+    display: none;
+}
+
+.chapter-selector{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;    
+}
+
+.chapter-content{
+    background: white;
+    padding: 20px;
+    height: 600px;
+    overflow-y: scroll;
+}
