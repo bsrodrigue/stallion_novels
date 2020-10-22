@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&display=swap');
 
+.active-chapter{
+    color: #fa7d09;
+    font-weight: bold;
+}
+
 .chapter-content{
     padding: 20px;
     width: 100%;

@@ -15,36 +15,44 @@
             <div class="col-md-4">
                 <div class="novel-chapter-list">
                     {% if chapters %}
-                        {% for chapter in chapters %}
-                            <div class="novel-chapter-li">
-                                <a href=" {% url 'chapter' novel.id chapter.id %} " class="novel-chapter-li-title"> Chapitre {{ forloop.counter }}: {{ chapter.title }} </a>
-                                <p class="novel-chapter-li-date"> publié: {{ chapter.created_at }} </p>
-                            </div >
-                            <hr/>
-                        {% endfor %}
+                    {% for chapter in chapters %}
+                    <div class="novel-chapter-li">
+                        <a href=" {% url 'chapter' novel.id chapter.id %} " class="novel-chapter-li-title {% if chapter.id == current_chapter.id %}active-chapter{% endif %}">
+                            Chapitre {{ forloop.counter }}: {{ chapter.title }}
+                        </a>
+                        <p class="novel-chapter-li-date"> publié: {{ chapter.created_at }} </p>
+                    </div>
+                    <hr />
+                    {% endfor %}
                     {% else %}
                     <h5>Pas de chapitres disponibles</h5>
                     {% endif %}
                 </div>
             </div>
             <div class="col-md-8">
-            <div class="chapter-content">
-                {% autoescape on %}
+                <div class="chapter-content">
+                    {% autoescape on %}
                     <p class="chapter"> {{ current_chapter.content|safe }} </p>
-                {% endautoescape %}
-            </div>
-                
+                    {% endautoescape %}
+                </div>
+
             </div>
         </div>
     </div>
 </section>
 <div id="down"></div>
 <div class="navigation-buttons">
-   <a href="#up"><div class="go-up">
-   <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/004-up%20arrow.svg' %}" alt="" srcset="">    
-   </div></a> 
-   <a href="#down"><div class="go-down">
-    <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/002-down%20arrow.svg' %}" alt="" srcset="">
-   </div></a> 
+    <a href="#up">
+        <div class="go-up">
+            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/004-up%20arrow.svg' %}" alt=""
+                srcset="">
+        </div>
+    </a>
+    <a href="#down">
+        <div class="go-down">
+            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/002-down%20arrow.svg' %}" alt=""
+                srcset="">
+        </div>
+    </a>
 </div>
 {% endblock content %}
