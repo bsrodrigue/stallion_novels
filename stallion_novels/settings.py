@@ -29,7 +29,7 @@ SECRET_KEY = "5mr9mp18k9pmmwrxgsr4it=3zaq%2zghg!!&w^l9r=3cwue$#0"
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENV == "DEV":
     DEBUG = True
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ["192.168.43.93", "127.0.0.01"]
 else:
     DEBUG = False
     ALLOWED_HOSTS = ["stallion-novels.herokuapp.com"]
