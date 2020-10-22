@@ -2,6 +2,7 @@
 {% load static %}
 {% block additional_stylesheets %}
 <link rel="stylesheet" href="{% static 'novels/css/novel.css' %}">
+<link rel="stylesheet" href="{% static 'novels/css/chapter.css' %}">
 {% endblock additional_stylesheets %}
 {% block active_container %}container{% endblock active_container %}
 {% block content %}
@@ -28,7 +29,9 @@
             </div>
             <div class="col-md-8">
             <div class="chapter-content">
-            <p> {{ current_chapter.content }} </p>
+                {% autoescape on %}
+                    <p class="chapter"> {{ current_chapter.content|safe }} </p>
+                {% endautoescape %}
             </div>
                 
             </div>

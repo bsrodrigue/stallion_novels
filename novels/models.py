@@ -1,5 +1,5 @@
 from django.db import models
-
+from djrichtextfield.models import RichTextField
 class Category(models.Model):
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=300)
@@ -9,7 +9,7 @@ class Category(models.Model):
 
 class Chapter(models.Model):
     title = models.CharField(max_length=30)
-    content = models.TextField()
+    content = RichTextField()
     created_at = models.DateField(auto_now_add=True)
     reads = models.PositiveIntegerField(default=0)
     likes = models.PositiveIntegerField(default=0)
