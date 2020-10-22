@@ -8,7 +8,7 @@
 {% block content %}
 <!-- New Novels -->
 <section>
-    <h1 class="section-title">Chapitres</h1>
+    <h1 id="up" class="section-title">Chapitres</h1>
     <div class="section-title-underbar underbar"></div>
     <div class="section-content">
         <div class="row">
@@ -38,4 +38,13 @@
         </div>
     </div>
 </section>
+<div id="down"></div>
+<div class="navigation-buttons">
+   <a href="#up"><div class="go-up">
+   <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/004-up%20arrow.svg' %}" alt="" srcset="">    
+   </div></a> 
+   <a href="#down"><div class="go-down">
+    <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/002-down%20arrow.svg' %}" alt="" srcset="">
+   </div></a> 
+</div>
 {% endblock content %}
