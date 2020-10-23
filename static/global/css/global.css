@@ -212,3 +212,12 @@ footer .container{
         height: 350px;
     }
 }
+
+.chapter-list-toggle{
+    height: 50px;
+    width: 50px;
+}
+
+.chapter-list-toggle:hover{
+    cursor: pointer;
+}

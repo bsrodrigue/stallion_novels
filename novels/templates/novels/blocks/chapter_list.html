@@ -1,3 +1,5 @@
+{% load static %}
+<img class="chapter-list-toggle" src="{% static 'global/images/icons/svg/035-hamburger.svg' %}" alt="chapters"srcset="">
 <div id="chapters" class="novel-chapter-list">
     {% if chapters %}
     {% for chapter in chapters %}
