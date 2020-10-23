@@ -129,7 +129,7 @@ section{
 }
 
 .novel-card-cover{
-    height: 175px;
+    height: 250px;
     border-radius: 10px 10px 0px 0px;
 }
 
@@ -210,6 +210,12 @@ footer .container{
 
     footer{
         height: 350px;
+    }
+}
+
+@media(max-width: 576px){
+    .novel-card-cover{
+        height: 250px;
     }
 }
 
