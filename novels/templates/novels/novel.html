@@ -12,11 +12,11 @@
     <div class="section-content">
         <div class="row">
             <div class="col-md-6">
-                 <!-- Chapter List -->
-                    {% include 'novels/blocks/chapter_list.html' %}
+                <img class="novel-cover" src=" {{ novel.cover.url }} " alt="">
             </div>
             <div class="col-md-6">
-                <img class="novel-cover" src=" {{ novel.cover.url }} " alt="">
+                 <!-- Chapter List -->
+                    {% include 'novels/blocks/chapter_list.html' %}
             </div>
         </div>
     </div>
