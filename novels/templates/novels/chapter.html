@@ -9,39 +9,29 @@
 <div class="progress"></div>
 <!-- New Novels -->
 <div class="container">
-<section>
-    <h1 id="up" class="section-title">Chapitres</h1>
-    <div class="section-title-underbar underbar"></div>
-    <div class="section-content">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="novel-chapter-list">
-                    {% if chapters %}
-                    {% for chapter in chapters %}
-                    <div class="novel-chapter-li">
-                        <a href=" {% url 'chapter' novel.id chapter.id %} " class="novel-chapter-li-title {% if chapter.id == current_chapter.id %}active-chapter{% endif %}">
-                            Chapitre {{ forloop.counter }}: {{ chapter.title }}
-                        </a>
-                        <p class="novel-chapter-li-date"> publié: {{ chapter.created_at }} </p>
+    <section>
+        <h1 id="up" class="section-title">Chapitres</h1>
+        <div class="section-title-underbar underbar"></div>
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-4">
+                <!-- Chapter List -->
+                    {% include 'novels/blocks/chapter_list.html' %}
+                </div>
+                <div class="col-md-8">
+                    <!-- Chapter Navigator -->
+                    {% include 'novels/blocks/chapter_navigator.html' %}
+                    <div class="chapter-content">
+                        {% autoescape on %}
+                        <p class="chapter"> {{ current_chapter.content|safe }} </p>
+                        {% endautoescape %}
                     </div>
-                    <hr />
-                    {% endfor %}
-                    {% else %}
-                    <h5>Pas de chapitres disponibles</h5>
-                    {% endif %}
+                    <!-- Chapter Navigator -->
+                    {% include 'novels/blocks/chapter_navigator.html' %}
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div class="chapter-content">
-                    {% autoescape on %}
-                    <p class="chapter"> {{ current_chapter.content|safe }} </p>
-                    {% endautoescape %}
-                </div>
-
             </div>
         </div>
-    </div>
-</section>
+    </section>
 </div>
 
 <div id="down"></div>
@@ -61,6 +51,6 @@
 </div>
 {% endblock content %}
 
-    {% block additional_scripts %}
-    <script src="{% static 'novels/js/reading_progress.js' %}"></script>
-    {% endblock additional_scripts %}
+{% block additional_scripts %}
+<script src="{% static 'novels/js/reading_progress.js' %}"></script>
+{% endblock additional_scripts %}

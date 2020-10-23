@@ -61,4 +61,26 @@
     width: 100%;
 }
 
+.chapter-navigator{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
 
+.chapter-navigator-button{
+    background: #fa7d09;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.chapter-navigator-link{
+    color: white;
+    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.chapter-navigator-link:hover{
+    color: white;
+    text-decoration: none;
+}

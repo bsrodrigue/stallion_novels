@@ -12,19 +12,8 @@
     <div class="section-content">
         <div class="row">
             <div class="col-md-6">
-                <div class="novel-chapter-list">
-                    {% if chapters %}
-                        {% for chapter in chapters %}
-                            <div class="novel-chapter-li">
-                                <a href=" {% url 'chapter' novel.id chapter.id %} " class="novel-chapter-li-title"> Chapitre {{ forloop.counter }}: {{ chapter.title }} </a>
-                                <p class="novel-chapter-li-date"> publié: {{ chapter.created_at }} </p>
-                            </div >
-                            <hr/>
-                        {% endfor %}
-                    {% else %}
-                    <h5>Pas de chapitres disponibles</h5>
-                    {% endif %}
-                </div>
+                 <!-- Chapter List -->
+                    {% include 'novels/blocks/chapter_list.html' %}
             </div>
             <div class="col-md-6">
                 <img class="novel-cover" src=" {{ novel.cover.url }} " alt="">

@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -33,15 +34,19 @@ def category(request, category_id):
     )
 
 
-def chapter(request, novel_id, chapter_id):
+def chapter(request, novel_id, chapter_index):
     novel = Novel.objects.get(pk=novel_id)
-    chapters = Chapter.objects.filter(novel=novel_id)
-    
-    if int(chapter_id) == 0:
-        current_chapter = chapters.order_by('-order')[0]
-    else:
-        current_chapter = chapters.get(pk=chapter_id)
+    chapters = Chapter.objects.filter(novel=novel_id).order_by('created_at')
 
+    paginator = Paginator(chapters, 1)
+
+    page_number = request.GET.get('page')
+    target_page_number = page_number or chapter_index
+    
+    page_obj = paginator.get_page(target_page_number)
+    current_chapter = page_obj[0]
+
+    
     return render(
         request,
         "novels/chapter.html",
@@ -49,6 +54,7 @@ def chapter(request, novel_id, chapter_id):
             "page_title": f"{current_chapter.title}",
             "novel": novel,
             "chapters": chapters,
+            "page_obj": page_obj,
             "current_chapter": current_chapter,
             "page_hero_title": f"Chapitre: {current_chapter.title}",
             "page_hero_description": f"Bonne lecture",
@@ -58,7 +64,7 @@ def chapter(request, novel_id, chapter_id):
 
 def novel(request, novel_id):
     novel = Novel.objects.get(pk=novel_id)
-    chapters = Chapter.objects.filter(novel=novel_id)
+    chapters = Chapter.objects.filter(novel=novel_id).order_by('created_at')
 
     return render(
         request,
