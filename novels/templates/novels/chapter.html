@@ -25,6 +25,7 @@
                         {% autoescape on %}
                         <p class="chapter"> {{ current_chapter.content|safe }} </p>
                         {% endautoescape %}
+                    <div id="down"></div>
                     </div>
                     <!-- Chapter Navigator -->
                     {% include 'novels/blocks/chapter_navigator.html' %}
@@ -34,7 +35,6 @@
     </section>
 </div>
 
-<div id="down"></div>
 <div class="navigation-buttons">
     <a href="#up">
         <div class="go-up">
