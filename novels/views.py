@@ -4,6 +4,8 @@ from django.shortcuts import render
 
 from .models import Novel, Category, Chapter
 
+import readtime
+
 
 def home(request):
     latest_novels = Novel.objects.order_by("-created_at")
@@ -45,8 +47,8 @@ def chapter(request, novel_id, chapter_index):
     
     page_obj = paginator.get_page(target_page_number)
     current_chapter = page_obj[0]
+    reading_time = readtime.of_text(current_chapter.content)
 
-    
     return render(
         request,
         "novels/chapter.html",
@@ -56,6 +58,7 @@ def chapter(request, novel_id, chapter_index):
             "chapters": chapters,
             "page_obj": page_obj,
             "current_chapter": current_chapter,
+            "reading_time": reading_time.minutes,
             "page_hero_title": f"Chapitre: {current_chapter.title}",
             "page_hero_description": f"Bonne lecture",
         },
