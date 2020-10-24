@@ -1,6 +1,6 @@
 Working on:
     -reading time    
-    -more characters
+    -
 
 
 Planned:
@@ -14,6 +14,8 @@ Planned:
     -reading list management
     -create account
     -novel suggestion at the end of chapter
+    -Download novels as epub & pdf
 
 Finished:
     -dark mode reading
+    -more characters
