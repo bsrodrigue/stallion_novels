@@ -22,7 +22,7 @@ class Chapter(models.Model):
     )
 
     def __str__(self):
-        return self.title
+        return f"{self.novel}:{self.title}"
 
 class Novel(models.Model):
     title = models.CharField(max_length=100)
