@@ -1,6 +1,5 @@
 Working on:
-    -reading time
-    -dark mode reading
+    -reading time    
     -more characters
 
 
@@ -17,3 +16,4 @@ Planned:
     -novel suggestion at the end of chapter
 
 Finished:
+    -dark mode reading

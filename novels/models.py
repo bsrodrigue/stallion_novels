@@ -1,14 +1,15 @@
 from django.db import models
 from djrichtextfield.models import RichTextField
+
 class Category(models.Model):
-    title = models.CharField(max_length=30)
-    description = models.CharField(max_length=300)
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
 
     def __str__(self):
         return self.title
 
 class Chapter(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=100)
     content = RichTextField()
     created_at = models.DateField(auto_now_add=True)
     reads = models.PositiveIntegerField(default=0)
@@ -24,8 +25,8 @@ class Chapter(models.Model):
         return self.title
 
 class Novel(models.Model):
-    title = models.CharField(max_length=30)
-    description = models.CharField(max_length=300)
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
     cover = models.ImageField(upload_to='novel_covers')
     reads = models.PositiveIntegerField(default=0)
     likes = models.PositiveIntegerField(default=0)
@@ -37,9 +38,9 @@ class Novel(models.Model):
         on_delete=models.CASCADE,
     )
 
-    def has_chapters(self):
-        chapters = Chapter.objects.filter(novel=self)
-        return len(chapters)
+    def get_chapters(self):
+        chapters = Chapter.objects.filter(novel=self).order_by('-created_at')
+        return chapters
 
     def __str__(self):
         return self.title
