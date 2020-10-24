@@ -47,7 +47,7 @@ def chapter(request, novel_id, chapter_index):
     
     page_obj = paginator.get_page(target_page_number)
     current_chapter = page_obj[0]
-    reading_time = readtime.of_text(current_chapter.content)
+    reading_time = readtime.of_html(current_chapter.content)
 
     return render(
         request,
