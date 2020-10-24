@@ -3,6 +3,7 @@
 {% block additional_stylesheets %}
 <link rel="stylesheet" href="{% static 'novels/css/novel.css' %}">
 <link rel="stylesheet" href="{% static 'novels/css/chapter.css' %}">
+<link rel="stylesheet" href="{% static 'novels/css/dark_mode.css' %}">
 {% endblock additional_stylesheets %}
 {% block active_container %}{% endblock active_container %}
 {% block content %}
@@ -37,12 +38,12 @@
 </div>
 
 <div class="navigation-buttons">
-    {% comment %} <a href="#chapters">
+     <a id="dark-mode-toggle-button">
         <div class="go-up">
-            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/035-hamburger.svg' %}" alt="chapters"
+            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/005-brightness.svg' %}" alt="dark mode"
                 srcset="">
         </div>
-    </a> {% endcomment %}
+    </a> 
     <a href="#up">
         <div class="go-up">
             <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/004-up%20arrow.svg' %}" alt="start"
@@ -61,4 +62,5 @@
 {% block additional_scripts %}
 <script src="{% static 'novels/js/reading_progress.js' %}"></script>
 <script src="{% static 'novels/js/chapter_list.js' %}"></script>
+<script src="{% static 'novels/js/dark_mode.js' %}"></script>
 {% endblock additional_scripts %}
