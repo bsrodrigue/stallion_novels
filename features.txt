@@ -1,0 +1,19 @@
+Working on:
+    -reading time
+    -dark mode reading
+    -more characters
+
+
+Planned:
+    -blog and last articles
+    -last chapters on home page
+    -search
+    -ranking algorithm
+    -liking chapters
+    -comment chapters
+    -add to library
+    -reading list management
+    -create account
+    -novel suggestion at the end of chapter
+
+Finished:
