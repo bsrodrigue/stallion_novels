@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-4">
                 <!-- Chapter List -->
-                <img class="chapter-list-toggle" src="{% static 'global/images/icons/svg/035-hamburger.svg' %}" alt="chapters"srcset="">
+                <img class="chapter-list-toggle" src="{% static 'global/images/icons/svg/001-square.svg' %}" alt="chapters"srcset="">
                     {% include 'novels/blocks/chapter_list.html' %}
                 </div>
                 <div id="up" class="col-md-8">
@@ -40,23 +40,25 @@
 </div>
 
 <div class="navigation-buttons">
-     <a id="dark-mode-toggle-button">
+     <a style="cursor: pointer;" id="dark-mode-toggle-button">
         <div class="go-up">
-            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/005-brightness.svg' %}" alt="dark mode"
+            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/003-brightness.svg' %}" alt="dark mode"
                 srcset="">
         </div>
     </a> 
     <a href="#up">
         <div class="go-up">
-            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/004-up%20arrow.svg' %}" alt="start"
+            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/005-up-arrow.svg' %}" alt="start"
                 srcset="">
         </div>
     </a>
     <a href="#down">
         <div class="go-down">
-            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/002-down%20arrow.svg' %}" alt="end"
+            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/003-down-arrow.svg' %}" alt="end"
                 srcset="">
+                  
         </div>
+       
     </a>
 </div>
 {% endblock content %}

@@ -12,5 +12,6 @@
             "server": "localhost",
             "username": "stallion"
         }
-    ]
+    ],
+    "svg.preview.background": "transparent"
 }
