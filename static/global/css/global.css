@@ -48,6 +48,11 @@ transition: background 0.5s ease;
     color: #fa7d09;
 }
 
+.logo{
+    width: 75px;
+    height: 75px;
+}
+
 .navbar{
     background: var(--main-color) !important;
 }
@@ -185,6 +190,11 @@ footer .container{
     justify-content: center;
 }
 
+.footer-logo{
+    width: 150px;
+    height: 150px;
+}
+
 .footer-links{
     display: flex;
     justify-content: space-between;
@@ -219,6 +229,11 @@ footer .container{
 @media(max-width: 576px){
     .novel-card-cover{
         height: 250px;
+    }
+
+    .logo{
+        width: 50px;
+        height: 50px;
     }
 }
 
