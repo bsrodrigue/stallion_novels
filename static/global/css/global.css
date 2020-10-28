@@ -164,7 +164,7 @@ section{
 
 footer{
     background: #2f2519;
-    height: 300px;
+    padding: 25px; 
 }
 
 footer *{
@@ -187,7 +187,7 @@ footer .container{
     height: inherit;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .footer-logo{
@@ -219,11 +219,16 @@ footer .container{
 
     .footer-content{
         flex-direction: column-reverse;
+        align-items: center;
     }
 
-    footer{
-        height: 350px;
+    .footer-links{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
     }
+
 }
 
 @media(max-width: 576px){
