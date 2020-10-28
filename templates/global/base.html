@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'global/images/logo.png' %}" sizes="16x16" type="image/png">
+    <!-- Global Stylesheets -->
     <link rel="stylesheet" href="{% static 'global/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'global/css/global.css' %}">
     {% block additional_stylesheets %}
@@ -16,7 +17,7 @@
 <body>
     <!-- Header & Navbar -->
     {% include 'global/blocks/header.html' %}
-    
+
 
     <!-- Hero -->
     <div class="jumbotron">
@@ -28,14 +29,15 @@
 
     <!-- Container -->
     <div class=" {% block active_container %}{% endblock active_container %} ">
-       {% block content %}
-       {% endblock content %}
+        {% block content %}
+        {% endblock content %}
     </div>
 
     <!-- Footer -->
     {% include 'global/blocks/footer.html' %}
 
 
+    <!-- Global Scripts -->
     <script src="{% static 'global/js/jquery.min.js' %}"></script>
     <script src="{% static 'global/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'global/js/script.js' %}"></script>

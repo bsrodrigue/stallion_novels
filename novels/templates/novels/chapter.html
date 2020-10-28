@@ -7,8 +7,10 @@
 {% endblock additional_stylesheets %}
 {% block active_container %}{% endblock active_container %}
 {% block content %}
+
+<!-- Progress bars -->
 <div class="progress"></div>
-<!-- New Novels -->
+
 <div class="container">
     <section>
     <p>Temps de lecture estimé: {{ reading_time }} minute(s)</p>
@@ -25,12 +27,15 @@
                 <div id="up" class="col-md-8">
                     <!-- Chapter Navigator -->
                     {% include 'novels/blocks/chapter_navigator.html' %}
+
+                    <!-- Chapter Content -->
                     <div onmousedown="return false" onselectstart="return false" class="chapter-content unselectable">
                         {% autoescape on %}
                         <p> {{ current_chapter.content|safe }} </p>
                         {% endautoescape %}
                     <div id="down"></div>
                     </div>
+
                     <!-- Chapter Navigator -->
                     {% include 'novels/blocks/chapter_navigator.html' %}
                 </div>
@@ -39,28 +44,8 @@
     </section>
 </div>
 
-<div class="navigation-buttons">
-     <a style="cursor: pointer;" id="dark-mode-toggle-button">
-        <div class="go-up">
-            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/003-brightness.svg' %}" alt="dark mode"
-                srcset="">
-        </div>
-    </a> 
-    <a href="#up">
-        <div class="go-up">
-            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/005-up-arrow.svg' %}" alt="start"
-                srcset="">
-        </div>
-    </a>
-    <a href="#down">
-        <div class="go-down">
-            <img class="navigation-button-icon" src="{% static 'global/images/icons/svg/003-down-arrow.svg' %}" alt="end"
-                srcset="">
-                  
-        </div>
-       
-    </a>
-</div>
+<!-- Chapter Commands -->
+{% include 'novels/blocks/chapter_commands.html' %}
 {% endblock content %}
 
 {% block additional_scripts %}

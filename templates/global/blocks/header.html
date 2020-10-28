@@ -2,17 +2,23 @@
 <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
+
+                <!-- Brand & Logo -->
                 <a class="navbar-brand" href="/">
                     <img class="logo" src=" {% static 'global/images/logo.png' %} " alt="">
                 </a>
+
+                <!-- Navbar Toggler Button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
     
+                <!-- Actual Navbar -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                     <ul class="navbar-nav mr-auto">
-                        <!-- Navbar Dropdown -->
+                        <!-- Categories Dropdown -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,11 +33,15 @@
                             </div>
                         </li>
                     </ul>
+
+                    <!-- Novel Searchbar -->
                     <form class="form-inline my-2 my-lg-0 search-bar">
                         <input class="form-control mr-sm-2 search-bar-input" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0 search-bar-submit" type="submit">Chercher un livre</button>
                     </form>
+
                 </div>
+
             </div>
         </nav>
     </header>
