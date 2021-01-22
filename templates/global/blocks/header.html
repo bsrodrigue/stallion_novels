@@ -32,10 +32,33 @@
                             {% endif %}
                         </div>
                     </li>
+                </ul>
 
+                <!-- Novel Searchbar -->
+                <form class="form-inline my-2 my-lg-0 search-bar">
+                    <input class="form-control mr-sm-2 search-bar-input" type="search" placeholder="Search"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0 search-bar-submit" type="submit">Chercher un
+                        livre</button>
+                </form>
+
+
+
+                <ul class="navbar-nav">
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href=" {% url 'logout' %} ">Se Déconnecter</a>
+                     <!-- User Account Dropdown -->
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mon Compte
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="">Mes Créations</a>
+                            <a class="dropdown-item" href="">Ma Bibliothèque</a>
+                            <a class="dropdown-item" href="">Mon Compte</a>
+                            <a class="dropdown-item" href="">Mes Notifications</a>
+                            <a class="dropdown-item" href=" {% url 'logout' %} ">Se Déconnecter</a>
+                        </div>
                     </li>
                     {% else %}
                     <li class="nav-item">
@@ -50,13 +73,6 @@
 
                 </ul>
 
-                <!-- Novel Searchbar -->
-                <form class="form-inline my-2 my-lg-0 search-bar">
-                    <input class="form-control mr-sm-2 search-bar-input" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0 search-bar-submit" type="submit">Chercher un
-                        livre</button>
-                </form>
 
             </div>
 
