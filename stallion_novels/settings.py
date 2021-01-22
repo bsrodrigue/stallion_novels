@@ -197,3 +197,7 @@ DJRICHTEXTFIELD_CONFIG = {
 
 #Custom User Model
 AUTH_USER_MODEL = 'accounts.StallionUser'
+
+#LOGIN REDIRECTION
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
