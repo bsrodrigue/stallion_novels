@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # created apps
+
+    "accounts",
     "djrichtextfield",
     "novels",
 ]
@@ -192,3 +194,6 @@ DJRICHTEXTFIELD_CONFIG = {
         'width': 700
     }
 }
+
+#Custom User Model
+AUTH_USER_MODEL = 'accounts.StallionUser'
