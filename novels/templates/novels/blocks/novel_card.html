@@ -1,8 +1,12 @@
 {% load static %}
+{% load novel_extras %}
 <div class="novel-card">
         <img class="novel-card-cover" src=" {{ novel.cover.url }} " alt="">
         <div class="novel-card-text">
             <a href=" {% url 'novel' novel.id %} " class="novel-card-title">{{ novel.title }}</a>
             <p class="novel-card-category"> {{ novel.category }} </p>
+            {% if novel.id|is_my_novel:user.id %}
+             <a href="">Éditer</a>
+            {% endif %}
         </div>
 </div>

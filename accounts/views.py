@@ -5,6 +5,6 @@ from .forms import StallionUserCreationForm
 
 class SignUpView(CreateView):
     form_class = StallionUserCreationForm
-    sucess_url = reverse_lazy('login')
+    success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
