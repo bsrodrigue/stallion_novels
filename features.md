@@ -1,5 +1,5 @@
 Working on:
-
+    -create account
 
 
 Planned:
@@ -11,7 +11,7 @@ Planned:
     -comment chapters
     -add to library
     -reading list management
-    -create account
+    
     -novel suggestion at the end of chapter
     -Download novels as epub & pdf
     
