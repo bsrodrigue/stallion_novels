@@ -29,7 +29,7 @@ SECRET_KEY = "5mr9mp18k9pmmwrxgsr4it=3zaq%2zghg!!&w^l9r=3cwue$#0"
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENV == "DEV":
     DEBUG = True
-    ALLOWED_HOSTS = ["192.168.43.93", "127.0.0.1"]
+    ALLOWED_HOSTS = ["192.168.43.93", "127.0.0.1", "localhost"]
 else:
     DEBUG = False
     ALLOWED_HOSTS = ["stallion-novels.herokuapp.com"]
@@ -185,10 +185,10 @@ LOGGING = {
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 DJRICHTEXTFIELD_CONFIG = {
-    'js': ['//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'],
+    'js': ['//cdn.tiny.cloud/1/bdj6enu3ljfgm2iflhx0esi1d7dpt0k3a0ijr7zi754f77jt/tinymce/5/tinymce.min.js'],
     'init_template': 'djrichtextfield/init/tinymce.js',
     'settings': {
-        'menubar': False,
+        'menubar': True,
         'plugins': 'link image',
         'toolbar': 'bold italic | link image | removeformat',
         'width': 700

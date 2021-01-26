@@ -4,9 +4,43 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 
 from .models import Novel, Category, Chapter
-from .forms import NovelCreationForm
+from .forms import NovelCreationForm, ChapterCreationForm
 
 import readtime
+
+def edit_novel(request, novel_id):
+    novel = Novel.objects.get(pk=novel_id)
+    chapters = Chapter.objects.filter(novel=novel_id).order_by('created_at')
+
+    return render(
+        request,
+        "novels/forms/edit_novel.html",
+        {
+            "page_title": f"{novel.title}",
+            "novel": novel,
+            "chapters": chapters,
+            "page_hero_title": f"{novel.title}",
+            "page_hero_description": f"{novel.description}",
+        },
+    )
+
+
+def new_chapter(request, novel_id):
+    if request.method == 'POST':
+        form = ChapterCreationForm(request.POST)
+        if form.is_valid():
+            novel = Novel.objects.get(pk=novel_id)
+
+            new_chapter = Chapter()
+            new_chapter.title = form.cleaned_data['title']
+            new_chapter.content = form.cleaned_data['content']
+            new_chapter.novel = novel
+            new_chapter.save()
+
+            return HttpResponseRedirect(reverse_lazy('my_creations'))
+    else:
+        form = ChapterCreationForm()
+    return render(request, 'novels/forms/new_chapter.html', {'form': form, 'novel_id': novel_id})
 
 
 def create_novel(request):
@@ -45,7 +79,7 @@ def my_creations(request):
 
 
 def home(request):
-    latest_novels = Novel.objects.order_by("-created_at")
+    latest_novels = Novel.public_novels.order_by("-created_at")
     return render(
         request,
         "novels/home.html",
