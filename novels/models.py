@@ -45,7 +45,7 @@ class Novel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     publication_date = models.DateField(blank=True, null=True)
     mature = models.BooleanField(default=False)
-    public = models.BooleanField(default=False)
+    public = models.BooleanField(default=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
     genre = models.CharField(choices=GENRES, max_length=30, default="F")
     category = models.ForeignKey(
