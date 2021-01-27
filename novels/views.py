@@ -52,7 +52,9 @@ def new_chapter(request, novel_id):
             new_chapter.save()
 
             return HttpResponseRedirect(reverse_lazy('my_creations'))
-    return render(request, 'novels/forms/new_chapter.html')
+    return render(request, 'novels/forms/new_chapter.html', {
+        'novel_id': novel_id,
+    })
 
 def edit_chapter(request, chapter_id):
     if request.method == 'POST':
