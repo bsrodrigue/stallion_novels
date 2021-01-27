@@ -250,3 +250,22 @@ footer .container{
 .chapter-list-toggle:hover{
     cursor: pointer;
 }
+
+#new_chapter_form{
+    display: flex;
+    flex-direction: column;
+    margin: 5% 5%;
+}
+
+#editor{
+    height: 150px;
+}
+
+#chapter_title_input{
+    height: 100px;
+    border: none;
+    padding: 0px 15px;
+    background: rgba(255, 255, 255, 0);
+
+    font-size: 50px;
+}

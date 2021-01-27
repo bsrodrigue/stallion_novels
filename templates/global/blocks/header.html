@@ -35,11 +35,10 @@
                 </ul>
 
                 <!-- Novel Searchbar -->
-                <form class="form-inline my-2 my-lg-0 search-bar">
-                    <input class="form-control mr-sm-2 search-bar-input" type="search" placeholder="Search"
+                <form action="{% url 'search' %}" method="get" class="form-inline my-2 my-lg-0 search-bar">
+                    <input name="search_term" class="form-control mr-sm-2 search-bar-input" type="search" placeholder="Entrez le nom d'un roman"
                         aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0 search-bar-submit" type="submit">Chercher un
-                        livre</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0 search-bar-submit" type="submit">Chercher</button>
                 </form>
 
 

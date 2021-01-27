@@ -8,6 +8,9 @@ class Category(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
 
+    class Meta:
+        verbose_name_plural = 'categories'
+
     def __str__(self):
         return self.title
 
@@ -38,7 +41,7 @@ class Novel(models.Model):
     ]
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=1000)
-    cover = models.ImageField(upload_to='novel_covers', default='novel_covers/ln-cover-1.jpg')
+    cover = models.ImageField(upload_to='novel_covers', default='novel_covers/default.png')
     created_at = models.DateTimeField(auto_now_add=True)
     publication_date = models.DateField(blank=True, null=True)
     mature = models.BooleanField(default=False)

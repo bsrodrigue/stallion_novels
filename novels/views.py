@@ -4,9 +4,23 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 
 from .models import Novel, Category, Chapter
-from .forms import NovelCreationForm, ChapterCreationForm
+from .forms import NovelCreationForm, ChapterCreationForm, ChapterEditForm
 
 import readtime
+
+def search(request):
+    search_term = request.GET.get('search_term')
+    found_novels = Novel.public_novels.filter(title__icontains=search_term).order_by("-created_at")
+    return render(
+        request,
+        "novels/search_result.html",
+        {
+            "page_title": "Recherche",
+            "found_novels": found_novels,
+            "page_hero_title": "Résultats de recherche",
+            "page_hero_description": "Lisez, écrivez et partagez des Webnovels Africains",
+        },
+    )
 
 def edit_novel(request, novel_id):
     novel = Novel.objects.get(pk=novel_id)
@@ -38,10 +52,35 @@ def new_chapter(request, novel_id):
             new_chapter.save()
 
             return HttpResponseRedirect(reverse_lazy('my_creations'))
-    else:
-        form = ChapterCreationForm()
-    return render(request, 'novels/forms/new_chapter.html', {'form': form, 'novel_id': novel_id})
+    return render(request, 'novels/forms/new_chapter.html')
 
+def edit_chapter(request, chapter_id):
+    if request.method == 'POST':
+        form = ChapterEditForm(request.POST)
+        if form.is_valid():
+
+            edited_chapter = Chapter.objects.get(pk=chapter_id)
+            edited_chapter.title = form.cleaned_data['title']
+            edited_chapter.content = form.cleaned_data['content']
+            edited_chapter.save()
+
+            return HttpResponseRedirect(reverse_lazy('my_creations'))
+
+    chapter_to_be_edited = Chapter.objects.get(pk=chapter_id)
+    return render(request, 'novels/forms/edit_chapter.html', {
+        'chapter_id': chapter_id,
+        'chapter': chapter_to_be_edited,
+    })
+
+def delete_chapter(request, chapter_id):
+    chapter_to_be_deleted = Chapter.objects.get(pk=chapter_id)
+    chapter_to_be_deleted.delete()
+    return HttpResponseRedirect(reverse_lazy('my_creations'))
+
+def delete_novel(request, novel_id):
+    novel_to_be_deleted = Novel.objects.get(pk=novel_id)
+    novel_to_be_deleted.delete()
+    return HttpResponseRedirect(reverse_lazy('my_creations'))
 
 def create_novel(request):
     if request.method == 'POST':

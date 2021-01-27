@@ -15,14 +15,16 @@
 <script src=" {% static 'novels/js/chapter_form.js' %} "></script>
 {% endblock additional_scripts %}
 {% block content %}
-<form id="new_chapter_form" action="{% url 'new_chapter' novel_id %}" method="post">
+<form id="new_chapter_form" action="{% url 'edit_chapter' chapter_id %}" method="post">
   {% csrf_token %}
   <label for="title">Titre du Chapitre</label>
-  <input id="chapter_title_input" type="text" name="title" id="" required placeholder="Veuillez entrer un titre pour le chapitre">
+  <input value="{{ chapter.title }}" id="chapter_title_input" type="text" name="title" id="" required placeholder="Veuillez entrer un titre pour le chapitre">
   <input id="chapter_content_input" type="text" name="content" id="" hidden>
   <label for="content">Contenu du Chapitre</label>
   <div id="editor">
-
+    {% autoescape on %}
+        {{ chapter.content|safe }} 
+    {% endautoescape %}
   </div>
   <input id="chapter_save_button" class="btn btn-dark"type="submit" value="Sauvegarder et Publier">
 </form>

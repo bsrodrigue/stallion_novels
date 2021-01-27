@@ -8,3 +8,7 @@ class NovelCreationForm(forms.Form):
 class ChapterCreationForm(forms.Form):
     title = forms.CharField(label='Titre', max_length=100)
     content = forms.CharField(label='Contenu',widget=RichTextWidget())
+
+class ChapterEditForm(forms.Form):
+    title = forms.CharField(label='Titre', max_length=100)
+    content = forms.CharField(label='Contenu',widget=RichTextWidget())

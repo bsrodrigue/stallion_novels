@@ -6,9 +6,12 @@
             <a href=" {% url 'novel' novel.id %} " class="novel-card-title">{{ novel.title }}</a>
             <p class="novel-card-category"> {{ novel.category }} </p>
             {% if novel.id|is_my_novel:user.id %}
+            <hr/>
              <a href=" {% url 'new_chapter' novel.id %} ">Nouveau Chapitre</a>
              /
              <a href=" {% url 'edit_novel' novel.id %} ">Éditer</a>
+             /
+             <a href=" {% url 'delete_novel' novel.id %} ">Supprimer</a>
             {% endif %}
         </div>
 </div>
