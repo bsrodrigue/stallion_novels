@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('category/<int:category_id>', views.category, name='category'),
+    path('genre/<str:genre_name>', views.genre, name='genre'),
     path('search', views.search, name='search'),
     path('novel/<int:novel_id>', views.novel, name='novel'),
     path('chapter/<int:novel_id>/<int:chapter_index>',
@@ -14,7 +14,11 @@ urlpatterns = [
 # Account Related
 urlpatterns += [
     path('account/my_creations', views.my_creations, name='my_creations'),
-    path('account/create_novel', views.create_novel, name='create_novel'),
+]
+
+# Novel
+urlpatterns += [
+    path('account/new_novel', views.new_novel, name='new_novel'),
     path('account/edit_novel/<int:novel_id>',
          views.edit_novel, name='edit_novel'),
     path('account/delete_novel/<int:novel_id>',

@@ -12,8 +12,6 @@
     {% block additional_stylesheets %}
     {% endblock additional_stylesheets %}
     <title> {{ page_title }} </title>
-   
-    
 </head>
 
 <body>
@@ -24,13 +22,19 @@
     <!-- Hero -->
     <div class="jumbotron">
         <div class="container">
-            <h1> {{ page_hero_title }} </h1>
-            <p> {{ page_hero_description }} </p>
+            <h1 class="page-hero-title"> {{ page_hero_title }} </h1>
+            <p class="page-hero-description"> {{ page_hero_description }} </p>
+            {% block hero_additional_content %}
+            
+            {% endblock hero_additional_content %}
         </div>
     </div>
 
     <!-- Container -->
-    <div class=" {% block active_container %}{% endblock active_container %} ">
+    <div class="
+    {% comment %} active_container is for setting 'container' class {% endcomment %}
+    {% block active_container %}
+    {% endblock active_container %} ">
         {% block content %}
         {% endblock content %}
     </div>

@@ -3,14 +3,16 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import render
 
-from .models import Novel, Category, Chapter
+from .models import Novel, Chapter
 from .forms import NovelCreationForm, ChapterCreationForm, ChapterEditForm
 
 import readtime
 
+
 def search(request):
     search_term = request.GET.get('search_term')
-    found_novels = Novel.public_novels.filter(title__icontains=search_term).order_by("-created_at")
+    found_novels = Novel.public_novels.filter(
+        title__icontains=search_term).order_by("-created_at")
     return render(
         request,
         "novels/search_result.html",
@@ -21,6 +23,7 @@ def search(request):
             "page_hero_description": "Lisez, écrivez et partagez des Webnovels Africains",
         },
     )
+
 
 def edit_novel(request, novel_id):
     novel = Novel.objects.get(pk=novel_id)
@@ -56,6 +59,7 @@ def new_chapter(request, novel_id):
         'novel_id': novel_id,
     })
 
+
 def edit_chapter(request, chapter_id):
     if request.method == 'POST':
         form = ChapterEditForm(request.POST)
@@ -74,17 +78,20 @@ def edit_chapter(request, chapter_id):
         'chapter': chapter_to_be_edited,
     })
 
+
 def delete_chapter(request, chapter_id):
     chapter_to_be_deleted = Chapter.objects.get(pk=chapter_id)
     chapter_to_be_deleted.delete()
     return HttpResponseRedirect(reverse_lazy('my_creations'))
+
 
 def delete_novel(request, novel_id):
     novel_to_be_deleted = Novel.objects.get(pk=novel_id)
     novel_to_be_deleted.delete()
     return HttpResponseRedirect(reverse_lazy('my_creations'))
 
-def create_novel(request):
+
+def new_novel(request):
     if request.method == 'POST':
         form = NovelCreationForm(request.POST)
         if form.is_valid():
@@ -133,18 +140,25 @@ def home(request):
     )
 
 
-def category(request, category_id):
-    category = Category.objects.get(pk=category_id)
-    latest_novels = Novel.objects.filter(
-        category=category_id).order_by("-created_at")
+def genre(request, genre_name):
+    genres_mapping = {
+        'UNKNOWN': ['Inconnu', 'Plongez dans des univers fantastiques où votre imagination est la seule limite.'],
+        'FANTASY': ['Fantasy', 'Plongez dans des univers fantastiques où votre imagination est la seule limite.'],
+        'ADVENTURE': ['Aventure', 'Échappez à la routine et vivez de grandes aventures.'],
+        'ROMANCE': ['Romance', 'Vous croyez en l\'amour? Laissez votre coeur s\'emballer avec notre collection d\'histoires roses.'],
+    }
+    requested_genre = genres_mapping[genre_name]
+
+    requested_genre_novels = Novel.objects.filter(
+        genre=genre_name).order_by("-created_at")
     return render(
         request,
-        "novels/category.html",
+        "novels/genre.html",
         {
-            "page_title": f"Catégorie {category.title}",
-            "latest_novels": latest_novels,
-            "page_hero_title": f"{category.title}",
-            "page_hero_description": f"{category.description}",
+            "page_title": f"Genre {requested_genre[0]}",
+            "requested_genre_novels": requested_genre_novels,
+            "page_hero_title": f"Collection {requested_genre[0]}",
+            "page_hero_description": f"{requested_genre[1]}",
         },
     )
 

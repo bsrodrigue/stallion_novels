@@ -4,16 +4,6 @@ from django.contrib.auth import get_user_model
 
 from .managers import PublicNovelsManager
 
-class Category(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.CharField(max_length=500)
-
-    class Meta:
-        verbose_name_plural = 'categories'
-
-    def __str__(self):
-        return self.title
-
 class Chapter(models.Model):
     title = models.CharField(max_length=100)
     content = RichTextField()
@@ -48,13 +38,6 @@ class Novel(models.Model):
     public = models.BooleanField(default=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
     genre = models.CharField(choices=GENRES, max_length=30, default="F")
-    category = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-    )
-
     objects = models.Manager()
     public_novels = PublicNovelsManager()
     

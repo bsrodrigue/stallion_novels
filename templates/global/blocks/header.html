@@ -22,14 +22,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Catégories
+                            Genres
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {% if categories %}
-                            {% for category in categories %}
-                            <a class="dropdown-item" href="{% url 'category' category.id %} "> {{ category.title }} </a>
-                            {% endfor %}
-                            {% endif %}
+                            <a class="dropdown-item" href="{% url 'genre' 'FANTASY' %} ">Fantasy</a>
+                            <a class="dropdown-item" href="{% url 'genre' 'ADVENTURE' %} ">Aventure</a>
+                            <a class="dropdown-item" href="{% url 'genre' 'ROMANCE' %} ">Romance</a>
                         </div>
                     </li>
                 </ul>
