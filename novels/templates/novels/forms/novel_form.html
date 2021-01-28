@@ -23,10 +23,10 @@
 <form id="novel_form" action=" {% if new_novel %} {% url 'new_novel' %} {% else %}  {% url 'edit_novel' novel.id %}  {% endif %}  " method="post">
     {% csrf_token %}
 
-  <div class="my-2">
+  {% comment %} <div class="my-2">
         <p>Image de Couverture</p>
         {{ form.cover }}
-    </div>
+    </div> {% endcomment %}
 
 
     <!-- Novel Title Input -->
