@@ -22,6 +22,13 @@
 {% block content %}
 <form id="novel_form" action=" {% if new_novel %} {% url 'new_novel' %} {% else %}  {% url 'edit_novel' novel.id %}  {% endif %}  " method="post">
     {% csrf_token %}
+
+  <div class="my-2">
+        <p>Image de Couverture</p>
+        {{ form.cover }}
+    </div>
+
+
     <!-- Novel Title Input -->
   <input value="{% if novel %} {{ novel.title }} {% endif %}" id="title_input" type="text" name="title" id="" required placeholder="Nouveau Titre...">
 
@@ -29,7 +36,6 @@
         {{ form.genre.label_tag }}
         {{ form.genre }}
     </div>
-    
 
       <!-- Actual Novel Description Input -->
   <input id="novel_description_input" type="text" name="description" id="" hidden>

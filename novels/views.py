@@ -106,10 +106,10 @@ def delete_novel(request, novel_id):
 def edit_novel(request, novel_id):
     if request.method == 'POST':
         genres_mapping = {
-            'UNKNOWN': 'Inconnu',
-            'FANTASY': 'Fantasy',
-            'ADVENTURE': 'Aventure',
-            'ROMANCE': 'Romance',
+            'Inconnu': 'Inconnu',
+            'Fantasy': 'Fantasy',
+            'Aventure': 'Aventure',
+            'Romance': 'Romance',
         }
         form = NovelForm(request.POST)
         if form.is_valid():
@@ -139,15 +139,16 @@ def edit_novel(request, novel_id):
 def new_novel(request):
     if request.method == 'POST':
         genres_mapping = {
-            'UNKNOWN': 'Inconnu',
-            'FANTASY': 'Fantasy',
-            'ADVENTURE': 'Aventure',
-            'ROMANCE': 'Romance',
+            'Inconnu': 'Inconnu',
+            'Fantasy': 'Fantasy',
+            'Aventure': 'Aventure',
+            'Romance': 'Romance',
         }
         form = NovelForm(request.POST)
         if form.is_valid():
 
             new_novel = Novel()
+            new_novel.cover = form.cleaned_data['cover']
             new_novel.title = form.cleaned_data['title']
             new_novel.description = form.cleaned_data['description']
             new_novel.author = request.user
@@ -156,6 +157,8 @@ def new_novel(request):
             new_novel.save()
 
             return HttpResponseRedirect(reverse_lazy('my_creations'))
+        else:
+            print(form.errors)
     else:
         form = NovelForm()
 
@@ -196,10 +199,10 @@ def home(request):
 
 def genre(request, genre_name):
     genres_mapping = {
-        'UNKNOWN': ['Inconnu', 'Plongez dans des univers fantastiques où votre imagination est la seule limite.'],
-        'FANTASY': ['Fantasy', 'Plongez dans des univers fantastiques où votre imagination est la seule limite.'],
-        'ADVENTURE': ['Aventure', 'Échappez à la routine et vivez de grandes aventures.'],
-        'ROMANCE': ['Romance', 'Vous croyez en l\'amour? Laissez votre coeur s\'emballer avec notre collection d\'histoires roses.'],
+        'Inconnu': ['Inconnu', 'Plongez dans des univers fantastiques où votre imagination est la seule limite.'],
+        'Fantasy': ['Fantasy', 'Plongez dans des univers fantastiques où votre imagination est la seule limite.'],
+        'Aventure': ['Aventure', 'Échappez à la routine et vivez de grandes aventures.'],
+        'Romance': ['Romance', 'Vous croyez en l\'amour? Laissez votre coeur s\'emballer avec notre collection d\'histoires roses.'],
     }
     requested_genre = genres_mapping[genre_name]
 

@@ -38,6 +38,10 @@ transition: background 0.5s ease;
     width: 10px;
 }
 
+hr{
+    margin: 5px 0px;
+}
+
 @media (min-width: 1200px){
 .container{
     max-width: 1000px;
@@ -170,9 +174,18 @@ section{
     padding: 5px;
 }
 
-.novel-card-category{
+.novel-card-genre{
     color: dimgray;
     font-weight: lighter;
+    font-size: 10px;
+    font-style: italic;
+}
+
+.novel-card-author{
+    color: dimgray;
+    font-weight: bold;
+    font-size: 14px;
+    font-style: italic;
 }
 
 .novel-card-title{
@@ -239,7 +252,7 @@ footer .container{
 @media(max-width: 768px){
 
     .novel-card-cover{
-        height: 275px;
+        height: 175px;
     }
 
     .footer-content{
@@ -258,7 +271,7 @@ footer .container{
 
 @media(max-width: 576px){
     .novel-card-cover{
-        height: 250px;
+        height: 175px;
     }
 
     .logo{

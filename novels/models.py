@@ -24,10 +24,10 @@ class Chapter(models.Model):
 
 class Novel(models.Model):
     GENRES = [
-        ("UNKNOWN", "Inconnu"),
-        ("FANTASY", "Fantasy"),
-        ("ADVENTURE", "Aventure"),
-        ("ROMANCE", "Romance"),
+        ("Inconnu", "Inconnu"),
+        ("Fantasy", "Fantasy"),
+        ("Aventure", "Aventure"),
+        ("Romance", "Romance"),
     ]
     title = models.CharField(max_length=100)
     description = RichTextField()
@@ -37,7 +37,7 @@ class Novel(models.Model):
     mature = models.BooleanField(default=False)
     public = models.BooleanField(default=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
-    genre = models.CharField(choices=GENRES, max_length=30, default="F")
+    genre = models.CharField(choices=GENRES, max_length=30, default="Inconnu")
     objects = models.Manager()
     public_novels = PublicNovelsManager()
     

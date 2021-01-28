@@ -5,6 +5,7 @@ from .models import Novel
 
 class NovelForm(forms.Form):
     title = forms.CharField(label='Titre', max_length=100)
+    cover = forms.ImageField()
     description = forms.CharField(label='Description')
     genre = forms.ChoiceField(choices=Novel.GENRES)
 
