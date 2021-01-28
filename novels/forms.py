@@ -1,14 +1,15 @@
 from django import forms
 from djrichtextfield.widgets import RichTextWidget
 
-class NovelCreationForm(forms.Form):
-    title = forms.CharField(label='Titre', max_length=100)
-    description = forms.CharField(label='Description', max_length=1000)
+from .models import Novel
 
-class ChapterCreationForm(forms.Form):
+class NovelForm(forms.Form):
     title = forms.CharField(label='Titre', max_length=100)
-    content = forms.CharField(label='Contenu',widget=RichTextWidget())
+    description = forms.CharField(label='Description')
+    genre = forms.ChoiceField(choices=Novel.GENRES)
 
-class ChapterEditForm(forms.Form):
+
+class ChapterForm(forms.Form):
     title = forms.CharField(label='Titre', max_length=100)
-    content = forms.CharField(label='Contenu',widget=RichTextWidget())
+    content = forms.CharField(label='Contenu')
+    public = forms.BooleanField(label='Rendre public', required=False)

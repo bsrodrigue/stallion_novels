@@ -1,0 +1,48 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block active_container %}container{% endblock active_container %}
+
+
+{% block additional_stylesheets %}
+<link href=" {% static 'novels/css/quill.snow.css' %} " rel="stylesheet">
+{% endblock additional_stylesheets %}
+
+
+{% block additional_scripts %}
+<script src="{% static 'novels/js/quill.min.js' %}"></script>
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow',
+    placeholder: 'Écrivez quelque chose d\'intéressant...',
+  });
+</script>
+<script src=" {% static 'novels/js/novel_form.js' %} "></script>
+{% endblock additional_scripts %}
+
+{% block content %}
+<form id="novel_form" action=" {% if new_novel %} {% url 'new_novel' %} {% else %}  {% url 'edit_novel' novel.id %}  {% endif %}  " method="post">
+    {% csrf_token %}
+    <!-- Novel Title Input -->
+  <input value="{% if novel %} {{ novel.title }} {% endif %}" id="title_input" type="text" name="title" id="" required placeholder="Nouveau Titre...">
+
+    <div class="d-flex my-2 align-items-center">
+        {{ form.genre.label_tag }}
+        {{ form.genre }}
+    </div>
+    
+
+      <!-- Actual Novel Description Input -->
+  <input id="novel_description_input" type="text" name="description" id="" hidden>
+
+  <!-- QuillJS Novel Description Input -->
+  <div id="editor">
+   {% if novel %}
+   {% autoescape on %}
+    {{ novel.description|safe }}
+  {% endautoescape %}
+   {% endif %}
+  </div>
+
+    <input id="chapter_save_button" class="btn btn-dark"type="submit" value="Sauvegarder">
+</form>
+{% endblock content %}

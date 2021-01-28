@@ -8,11 +8,6 @@
             {{ chapter.title }}
         </a>
         <p class="novel-chapter-li-date"> publié: {{ chapter.created_at }} </p>
-        {% if novel.id|is_my_novel:user.id %}
-             <a href=" {% url 'edit_chapter' chapter.id %} ">Éditer</a>
-             /
-             <a href=" {% url 'delete_chapter' chapter.id %} ">Supprimer</a>
-            {% endif %}
     </div>
     <hr />
     {% endfor %}

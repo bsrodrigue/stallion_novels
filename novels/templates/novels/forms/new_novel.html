@@ -1,9 +1,0 @@
-{% extends 'global/base.html' %}
-{% block active_container %}container{% endblock active_container %}
-{% block content %}
-<form action=" {% url 'create_novel' %} " method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
-{% endblock content %}

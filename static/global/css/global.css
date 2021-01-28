@@ -29,11 +29,11 @@ transition: background 0.5s ease;
 }
 
 ::-webkit-scrollbar-track{
-    background: #2f2519;
+    background:var(--main-color);
 }
 
 ::-webkit-scrollbar-thumb{
-    background:#fa7d09;
+    background:var(--secondary-color);
     height: 10px;
     width: 10px;
 }
@@ -45,7 +45,7 @@ transition: background 0.5s ease;
 }
 
 .orange{
-    color: #fa7d09;
+    color: var(--secondary-color);
 }
 
 .logo{
@@ -87,21 +87,21 @@ transition: background 0.5s ease;
     border:none!important;
     border-radius: 5px !important;
     font-weight: bold;
-    color: #2f2519 !important;
+    color:var(--main-color) !important;
 }
 
 .search-bar-submit{
-    border: 2px solid #fa7d09 !important;
+    border: 2px solid var(--secondary-color) !important;
     border-radius: 5px !important;
     font-weight: bold;
 }
 
 .search-bar-submit:hover{
-    background: #fa7d09 !important;
+    background: var(--secondary-color) !important;
 }
 
 .jumbotron{
-    background: #fa7d09 !important;
+    background: var(--secondary-color) !important;
     border-radius: 0px !important;
     margin-bottom: 0px !important;
 }
@@ -140,6 +140,10 @@ section{
     margin-bottom: 15px;
 }
 
+.novel-cover{
+    width: 100%;
+}
+
 .novel-card{
     margin: 10px 0px;
     display: flex;
@@ -171,12 +175,12 @@ section{
 }
 
 .novel-card-title:hover{
-    color: #fa7d09;
+    color: var(--secondary-color);
     text-decoration: none;
 }
 
 footer{
-    background: #2f2519;
+    background:var(--main-color);
     padding: 25px; 
 }
 
@@ -264,21 +268,38 @@ footer .container{
     cursor: pointer;
 }
 
-#new_chapter_form{
+
+#novel_form{
+    display: flex;
+    flex-direction: column;
+    margin: 5% 5%; 
+}
+
+#chapter_form{
     display: flex;
     flex-direction: column;
     margin: 5% 5%;
 }
 
 #editor{
-    height: 150px;
+    height: 300px;
+    margin: 15px 0px;
 }
 
-#chapter_title_input{
+#title_input{
     height: 100px;
     border: none;
-    padding: 0px 15px;
+    padding: 15px 0px;
     background: rgba(255, 255, 255, 0);
+    color: rgba(0, 0, 0, 0.726);
+    font-weight: bold;
+    font-size: 25px;
+}
 
-    font-size: 50px;
+#title_input:focus{
+    border: none;
+}
+
+#title_input::placeholder{
+    color: rgba(0, 0, 0, 0.459);
 }

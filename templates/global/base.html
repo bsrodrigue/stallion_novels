@@ -23,7 +23,10 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="page-hero-title"> {{ page_hero_title }} </h1>
-            <p class="page-hero-description"> {{ page_hero_description }} </p>
+            {% autoescape on %}
+            <p class="page-hero-description">{{ page_hero_description|safe }}</p>
+            {% endautoescape %}
+
             {% block hero_additional_content %}
             
             {% endblock hero_additional_content %}

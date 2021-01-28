@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 
 from .models import Novel, Chapter
-from .forms import NovelCreationForm, ChapterCreationForm, ChapterEditForm
+from .forms import NovelForm, ChapterForm
 
 import readtime
 
@@ -25,13 +25,13 @@ def search(request):
     )
 
 
-def edit_novel(request, novel_id):
+def novel_dashboard(request, novel_id):
     novel = Novel.objects.get(pk=novel_id)
     chapters = Chapter.objects.filter(novel=novel_id).order_by('created_at')
 
     return render(
         request,
-        "novels/forms/edit_novel.html",
+        "novels/novel_dashboard.html",
         {
             "page_title": f"{novel.title}",
             "novel": novel,
@@ -44,7 +44,7 @@ def edit_novel(request, novel_id):
 
 def new_chapter(request, novel_id):
     if request.method == 'POST':
-        form = ChapterCreationForm(request.POST)
+        form = ChapterForm(request.POST)
         if form.is_valid():
             novel = Novel.objects.get(pk=novel_id)
 
@@ -52,30 +52,42 @@ def new_chapter(request, novel_id):
             new_chapter.title = form.cleaned_data['title']
             new_chapter.content = form.cleaned_data['content']
             new_chapter.novel = novel
+            new_chapter.public = form.cleaned_data['public']
             new_chapter.save()
 
             return HttpResponseRedirect(reverse_lazy('my_creations'))
-    return render(request, 'novels/forms/new_chapter.html', {
+        else:
+            return HttpResponse('Formulaire invalide')
+
+
+    return render(request, 'novels/forms/chapter_form.html', {
         'novel_id': novel_id,
+        'new_chapter': 'new_chapter',
+
     })
 
 
 def edit_chapter(request, chapter_id):
     if request.method == 'POST':
-        form = ChapterEditForm(request.POST)
+        form = ChapterForm(request.POST)
         if form.is_valid():
-
             edited_chapter = Chapter.objects.get(pk=chapter_id)
             edited_chapter.title = form.cleaned_data['title']
             edited_chapter.content = form.cleaned_data['content']
+            edited_chapter.public = form.cleaned_data['public']
             edited_chapter.save()
 
             return HttpResponseRedirect(reverse_lazy('my_creations'))
+        else:
+            return HttpResponse('Formulaire invalide')
+
 
     chapter_to_be_edited = Chapter.objects.get(pk=chapter_id)
-    return render(request, 'novels/forms/edit_chapter.html', {
+    return render(request, 'novels/forms/chapter_form.html', {
         'chapter_id': chapter_id,
         'chapter': chapter_to_be_edited,
+        'edit_chapter': 'edit_chapter',
+
     })
 
 
@@ -91,24 +103,66 @@ def delete_novel(request, novel_id):
     return HttpResponseRedirect(reverse_lazy('my_creations'))
 
 
+def edit_novel(request, novel_id):
+    if request.method == 'POST':
+        genres_mapping = {
+            'UNKNOWN': 'Inconnu',
+            'FANTASY': 'Fantasy',
+            'ADVENTURE': 'Aventure',
+            'ROMANCE': 'Romance',
+        }
+        form = NovelForm(request.POST)
+        if form.is_valid():
+
+            novel_to_be_edited = Novel.objects.get(pk=novel_id)
+            novel_to_be_edited.title = form.cleaned_data['title']
+            novel_to_be_edited.description = form.cleaned_data['description']
+            novel_to_be_edited.genre = genres_mapping[form.cleaned_data['genre']]
+
+            novel_to_be_edited.save()
+
+            return HttpResponseRedirect(reverse_lazy('my_creations'))
+
+
+    novel_to_be_edited = Novel.objects.get(pk=novel_id)
+    form = NovelForm(initial={
+        'genre': novel_to_be_edited.genre,
+    })
+    
+    return render(request, 'novels/forms/novel_form.html',{
+        'form': form,
+        'edit_novel': 'edit_novel',
+        'novel': novel_to_be_edited,
+        })
+
+
 def new_novel(request):
     if request.method == 'POST':
-        form = NovelCreationForm(request.POST)
+        genres_mapping = {
+            'UNKNOWN': 'Inconnu',
+            'FANTASY': 'Fantasy',
+            'ADVENTURE': 'Aventure',
+            'ROMANCE': 'Romance',
+        }
+        form = NovelForm(request.POST)
         if form.is_valid():
 
             new_novel = Novel()
             new_novel.title = form.cleaned_data['title']
             new_novel.description = form.cleaned_data['description']
             new_novel.author = request.user
-            new_novel.category = Category.objects.get(pk=1)
+            new_novel.genre = genres_mapping[form.cleaned_data['genre']]
 
             new_novel.save()
 
             return HttpResponseRedirect(reverse_lazy('my_creations'))
     else:
-        form = NovelCreationForm()
+        form = NovelForm()
 
-    return render(request, 'novels/forms/new_novel.html', {'form': form})
+    return render(request, 'novels/forms/novel_form.html',{
+        'form': form,
+        'new_novel': 'new_novel',
+        })
 
 
 def my_creations(request):
@@ -163,7 +217,7 @@ def genre(request, genre_name):
     )
 
 
-def chapter(request, novel_id, chapter_index):
+def preview_chapter(request, novel_id, chapter_index):
     novel = Novel.objects.get(pk=novel_id)
     chapters = Chapter.objects.filter(novel=novel_id).order_by('created_at')
 
@@ -186,7 +240,36 @@ def chapter(request, novel_id, chapter_index):
             "page_obj": page_obj,
             "current_chapter": current_chapter,
             "reading_time": reading_time.minutes,
-            "page_hero_title": f"Chapitre: {current_chapter.title}",
+            "page_hero_title": f"{current_chapter.title}",
+            "page_hero_description": f"Bonne lecture",
+        },
+    )
+
+
+def chapter(request, novel_id, chapter_index):
+    novel = Novel.objects.get(pk=novel_id)
+    chapters = Chapter.objects.filter(novel=novel_id, public=True).order_by('created_at')
+
+    paginator = Paginator(chapters, 1)
+
+    page_number = request.GET.get('page')
+    target_page_number = page_number or chapter_index
+
+    page_obj = paginator.get_page(target_page_number)
+    current_chapter = page_obj[0]
+    reading_time = readtime.of_html(current_chapter.content)
+
+    return render(
+        request,
+        "novels/chapter.html",
+        {
+            "page_title": f"{current_chapter.title}",
+            "novel": novel,
+            "chapters": chapters,
+            "page_obj": page_obj,
+            "current_chapter": current_chapter,
+            "reading_time": reading_time.minutes,
+            "page_hero_title": f"{current_chapter.title}",
             "page_hero_description": f"Bonne lecture",
         },
     )
@@ -194,7 +277,7 @@ def chapter(request, novel_id, chapter_index):
 
 def novel(request, novel_id):
     novel = Novel.objects.get(pk=novel_id)
-    chapters = Chapter.objects.filter(novel=novel_id).order_by('created_at')
+    chapters = Chapter.objects.filter(novel=novel_id, public=True).order_by('created_at')
 
     return render(
         request,

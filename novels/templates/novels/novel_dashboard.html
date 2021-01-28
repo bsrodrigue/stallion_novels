@@ -5,6 +5,12 @@
 {% endblock additional_stylesheets %}
 {% block active_container %}container{% endblock active_container %}
 {% block content %}
+
+<a href=" {% url 'new_chapter' novel.id %} ">Nouveau Chapitre</a>
+/
+<a href=" {% url 'edit_novel' novel.id %} ">Éditer le Roman</a>
+/
+<a href=" {% url 'delete_novel' novel.id %} ">Supprimer le Roman</a>
 <!-- Chapter List -->
 <section>
     <h1 class="section-title">Chapitres</h1>
@@ -13,7 +19,7 @@
         <div class="row">
             <div class="col-md-6">
                  <!-- Chapter List -->
-                    {% include 'novels/blocks/chapter_list.html' %}
+                    {% include 'novels/blocks/preview_chapter_list.html' %}
             </div>
             <div class="col-md-6">
                 <img class="novel-cover" src=" {{ novel.cover.url }} " alt="">
