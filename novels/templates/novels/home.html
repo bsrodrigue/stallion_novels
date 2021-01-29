@@ -3,13 +3,13 @@
 {% block content %}
 <!-- New Novels -->
 <section>
-    <h1 class="section-title">Nouveaux Web Novels</h1>
+    <h1 class="section-title">Nouveaux Romans</h1>
     <div class="section-title-underbar underbar"></div>
     <div class="section-content">
         {% if latest_novels %}
         {% include 'novels/blocks/novel_cards.html' with novels=latest_novels %}
         {% else %}
-        <h1>PAS DE WEBNOVELS</h1>
+        <h1>Pas de Romans... Yako :'(</h1>
         {% endif %}
     </div>
 </section>

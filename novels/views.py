@@ -207,7 +207,7 @@ def home(request):
             "page_title": "Stallion Novels",
             "latest_novels": latest_novels,
             "page_hero_title": "Bienvenue sur Stallion Novels",
-            "page_hero_description": "Lisez, écrivez et partagez des Webnovels Africains",
+            "page_hero_description": "Lisez, écrivez et partagez des romans en ligne Africains",
         },
     )
 
