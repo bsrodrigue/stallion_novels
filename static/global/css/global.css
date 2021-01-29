@@ -312,6 +312,13 @@ footer .container{
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        text-align: center;
+    }
+
+    .logo{
+        width: 50px;
+        height: 50px;
+        text-align: center;
     }
 
 }
@@ -340,6 +347,20 @@ footer .container{
     .logo{
         width: 50px;
         height: 50px;
+        text-align: center;
+    }
+
+    .footer-content{
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .footer-links{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
     }
 }
 
