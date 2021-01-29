@@ -11,6 +11,16 @@
     font-family: 'Roboto', sans-serif;
 }
 
+small{
+    margin-bottom: 0px;
+    line-height: normal;
+}
+
+p{
+    margin-bottom: 0px;
+    line-height: normal;
+}
+
 html{
     scroll-behavior: smooth;
 }

@@ -33,9 +33,7 @@
 
                     <!-- Chapter Content -->
                     <div onmousedown="return false" onselectstart="return false" class="chapter-content unselectable">
-                        {% autoescape on %}
-                        <p> {{ current_chapter.content|safe }} </p>
-                        {% endautoescape %}
+                        <p id='chapter-content'> {{ current_chapter.content|safe }} </p>
                         <div id="down"></div>
                         <div class="d-flex justify-content-between">
                             <small><span style="margin-right: 5px;"><svg xmlns="http://www.w3.org/2000/svg"
