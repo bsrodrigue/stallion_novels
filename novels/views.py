@@ -164,7 +164,6 @@ def new_novel(request):
         if form.is_valid():
 
             new_novel = Novel()
-            new_novel.cover = form.cleaned_data['cover']
             new_novel.title = form.cleaned_data['title']
             new_novel.description = form.cleaned_data['description']
             new_novel.author = request.user
