@@ -171,19 +171,20 @@ section{
 .novel-card-cover-overlay{
     position: relative;
     z-index: 1;
-    background: #555555ab;
-    height: 200px;
+    background: var(--secondary-color);
+    height: 220px;
     transition: all 0.5s ease;
     border-radius: 0px 15px 0px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    bottom: 20px;
 
 }
 
 .novel-card-cover-overlay-content{
     box-sizing: border-box;
-    margin: 15px 5px;
+    margin: 5px;
 }
 
 .novel-card-cover{
@@ -201,7 +202,6 @@ section{
 }
 
 .card-overlay-appear{
-    background: #555555d8;
     transform: translate(0px, -200px);
     transition: all 0.5s ease;
 }
@@ -228,7 +228,7 @@ section{
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
     font-size: 14px;
-    color:#2f2519;
+    color:var(--primary-color);
 }
 
 .novel-card-title:hover{
@@ -294,7 +294,7 @@ footer .container{
 
     .novel-card-cover-overlay-description{
         color: white;
-        font-size: 10px;
+        font-size: 8px;
     }
 
     .novel-card-cover{
@@ -303,7 +303,7 @@ footer .container{
     }
 
     .card-overlay-appear{
-        transform: translate(0px, -180px);
+        transform: translate(0px, -150px);
         transition: all 0.5s ease;
     }
 
@@ -336,7 +336,7 @@ footer .container{
 
     .novel-card-cover-overlay-description{
         color: white;
-        font-size: 10px;
+        font-size: 8px;
     }
 
     .novel-card-cover-box{
@@ -345,7 +345,7 @@ footer .container{
     }
 
     .card-overlay-appear{
-        transform: translate(0px, -180px);
+        transform: translate(0px, -150px);
         transition: all 0.5s ease;
     }
 
