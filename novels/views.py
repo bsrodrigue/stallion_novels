@@ -3,10 +3,26 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import render
 
-from .models import Novel, Chapter
+from .models import Novel, Chapter, Like
 from .forms import NovelForm, ChapterForm
 
 import readtime
+
+def unlike_chapter(request, chapter_id):
+    like_to_delete = Like.objects.filter(chapter=chapter_id, liker=request.user.id)[0]
+    like_to_delete.delete()
+    return HttpResponseRedirect(reverse_lazy('home'))
+
+
+def like_chapter(request, chapter_id):
+    chapter = Chapter.objects.get(pk=chapter_id)
+
+    new_like = Like()
+    new_like.liker = request.user
+    new_like.chapter = chapter
+    new_like.save()
+
+    return HttpResponseRedirect(reverse_lazy('home'))
 
 
 def search(request):

@@ -10,6 +10,12 @@ urlpatterns = [
          views.chapter, name='chapter'),
 ]
 
+# Like/Unlike Chapter
+urlpatterns += [
+     path('like_chapter/<int:chapter_id>', views.like_chapter, name='like_chapter'),
+     path('unlike_chapter/<int:chapter_id>', views.unlike_chapter, name='unlike_chapter'),
+]
+
 
 # Account Related
 urlpatterns += [

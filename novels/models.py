@@ -4,6 +4,19 @@ from django.contrib.auth import get_user_model
 
 from .managers import PublicNovelsManager
 
+class Like(models.Model):
+    liker = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+    )
+
+    chapter = models.ForeignKey(
+        'Chapter', on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return f"{self.liker.username} likes {self.chapter.title} from {self.chapter.novel.title}"
+
 class Chapter(models.Model):
     title = models.CharField(max_length=100)
     content = RichTextField()
@@ -18,6 +31,10 @@ class Chapter(models.Model):
         'Novel',
         on_delete=models.CASCADE,
     )
+
+    def get_likes(self):
+        likes = Like.objects.filter(chapter=self)
+        return likes
 
     def __str__(self):
         return f"{self.novel}:{self.title}"
@@ -45,6 +62,13 @@ class Novel(models.Model):
     def get_chapters(self):
         chapters = Chapter.objects.filter(novel=self).order_by('-created_at')
         return chapters
+
+    def get_likes(self):
+        chapters = self.get_chapters()
+        likes = 0
+        for chapter in chapters:
+            likes += len(chapter.get_likes())
+        return likes
 
     def __str__(self):
         return self.title
