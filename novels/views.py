@@ -3,8 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import render
 
-from .models import Novel, Chapter, Like
-from .forms import NovelForm, ChapterForm
+from .models import Novel, Chapter, Like, Comment
+from .forms import NovelForm, ChapterForm, CommentForm
 
 import readtime
 
@@ -263,10 +263,25 @@ def preview_chapter(request, novel_id, chapter_index):
         },
     )
 
+def comment_chapter(request, chapter_id):
+    chapter = Chapter.objects.get(pk=chapter_id)
+    new_comment = Comment()
+    new_comment.author = request.user
+    new_comment.chapter = chapter
+
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment.content = form.cleaned_data['content']
+        new_comment.save()
+        return HttpResponseRedirect(reverse_lazy('home'))
+    else:
+        return HttpResponse('Error while commenting')
+    
 
 def chapter(request, novel_id, chapter_index):
     novel = Novel.objects.get(pk=novel_id)
     chapters = Chapter.objects.filter(novel=novel_id, public=True).order_by('created_at')
+    
 
     paginator = Paginator(chapters, 1)
 
@@ -275,6 +290,7 @@ def chapter(request, novel_id, chapter_index):
 
     page_obj = paginator.get_page(target_page_number)
     current_chapter = page_obj[0]
+    comments = Comment.objects.filter(chapter=current_chapter.id).order_by('created_at')
     reading_time = readtime.of_html(current_chapter.content)
 
     return render(
@@ -284,6 +300,7 @@ def chapter(request, novel_id, chapter_index):
             "page_title": f"{current_chapter.title}",
             "novel": novel,
             "chapters": chapters,
+            "comments":comments,
             "page_obj": page_obj,
             "current_chapter": current_chapter,
             "reading_time": reading_time.minutes,

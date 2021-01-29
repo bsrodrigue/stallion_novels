@@ -20,9 +20,14 @@ html, body{
     background: white;
 }
 
+.material-shadow{
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
 body{
 transition: background 0.5s ease;
 }
+
 /*Scrollbar*/
 ::-webkit-scrollbar {
     width: 10px;
@@ -407,4 +412,43 @@ footer .container{
 
 #title_input::placeholder{
     color: rgba(0, 0, 0, 0.459);
+}
+
+.comment-section{
+    height: 300px;
+    overflow-y: scroll;
+    margin: 10px 0px;
+    padding: 1% 2% 5% 2%;
+}
+
+.comment{
+    margin: 10px 0px;
+    padding: 3% 3%;
+}
+
+.other-comment{
+    border-radius: 0px 25px 25px 25px;
+}
+
+.my-comment{
+    border-radius: 25px 0px 25px 25px;
+}
+
+.comment-author{
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.comment-date{
+    font-weight: lighter;
+    font-style: italic;
+}
+
+.comment-content{
+    font-size: 12px;
+}
+
+#comment-editor{
+    height: 150px;
+    margin: 15px 0px;
 }

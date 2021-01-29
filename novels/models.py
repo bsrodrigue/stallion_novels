@@ -4,6 +4,17 @@ from django.contrib.auth import get_user_model
 
 from .managers import PublicNovelsManager
 
+
+class Comment(models.Model):
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    chapter = models.ForeignKey('Chapter', on_delete=models.CASCADE)
+    content = RichTextField()
+    created_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"User '{self.author.username}' commented Chapter '{self.chapter.title}' from Novel '{self.chapter.novel.title}'"
+
+
 class Like(models.Model):
     liker = models.ForeignKey(
         get_user_model(),
@@ -17,13 +28,13 @@ class Like(models.Model):
     def __str__(self):
         return f"{self.liker.username} likes {self.chapter.title} from {self.chapter.novel.title}"
 
+
 class Chapter(models.Model):
     title = models.CharField(max_length=100)
     content = RichTextField()
     created_at = models.DateField(auto_now_add=True)
     publication_date = models.DateField(blank=True, null=True)
     reads = models.PositiveIntegerField(default=0)
-    likes = models.PositiveIntegerField(default=0)
     order = models.PositiveIntegerField(default=0)
     public = models.BooleanField(default=False)
 
@@ -34,10 +45,15 @@ class Chapter(models.Model):
 
     def get_likes(self):
         likes = Like.objects.filter(chapter=self)
-        return likes
+        return likes.count()
+
+    def get_comments(self):
+        comments = Comment.objects.filter(chapter=self)
+        return comments
 
     def __str__(self):
         return f"{self.novel}:{self.title}"
+
 
 class Novel(models.Model):
     GENRES = [
@@ -48,16 +64,17 @@ class Novel(models.Model):
     ]
     title = models.CharField(max_length=100)
     description = RichTextField()
-    cover = models.ImageField(upload_to='novel_covers', default='novel_covers/default.png')
+    cover = models.ImageField(upload_to='novel_covers',
+                              default='novel_covers/default.png')
     created_at = models.DateTimeField(auto_now_add=True)
     publication_date = models.DateField(blank=True, null=True)
     mature = models.BooleanField(default=False)
     public = models.BooleanField(default=True)
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
+    author = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
     genre = models.CharField(choices=GENRES, max_length=30, default="Inconnu")
     objects = models.Manager()
     public_novels = PublicNovelsManager()
-    
 
     def get_chapters(self):
         chapters = Chapter.objects.filter(novel=self).order_by('-created_at')
@@ -71,9 +88,15 @@ class Novel(models.Model):
         chapters = self.get_chapters()
         likes = 0
         for chapter in chapters:
-            likes += chapter.get_likes().count()
+            likes += chapter.get_likes()
         return likes
+
+    def get_comment_count(self):
+        chapters = self.get_chapters()
+        comments = 0
+        for chapter in chapters:
+            comments += chapter.get_comments().count()
+        return comments
 
     def __str__(self):
         return self.title
-

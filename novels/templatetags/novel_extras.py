@@ -15,10 +15,25 @@ def novel_likes(novelId):
     novel = Novel.objects.get(pk=novelId)
     return novel.get_likes()
 
+@register.filter(name='chapter_likes')
+def chapter_likes(chapter_id):
+    chapter = Chapter.objects.get(pk=chapter_id)
+    return chapter.get_likes()
+
+@register.filter(name='chapter_comments')
+def chapter_comments(chapter_id):
+    chapter = Chapter.objects.get(pk=chapter_id)
+    return chapter.get_comments().count()
+
 @register.filter(name='novel_public_chapters')
 def novel_public_chapters(novelId):
     novel = Novel.objects.get(pk=novelId)
     return novel.get_public_chapters().count()
+
+@register.filter(name='novel_comments')
+def novel_comments(novelId):
+    novel = Novel.objects.get(pk=novelId)
+    return novel.get_comment_count()
 
 @register.filter(name='is_already_liked')
 def is_already_liked(chapter_id, user_id):

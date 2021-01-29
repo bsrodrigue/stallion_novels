@@ -17,6 +17,11 @@ urlpatterns += [
 ]
 
 
+# Comment
+urlpatterns += [
+     path('comment_chapter/<int:chapter_id>', views.comment_chapter, name='comment_chapter'),
+]
+
 # Account Related
 urlpatterns += [
     path('account/my_creations', views.my_creations, name='my_creations'),
