@@ -63,11 +63,15 @@ class Novel(models.Model):
         chapters = Chapter.objects.filter(novel=self).order_by('-created_at')
         return chapters
 
+    def get_public_chapters(self):
+        chapters = Chapter.objects.filter(public=True, novel=self)
+        return chapters
+
     def get_likes(self):
         chapters = self.get_chapters()
         likes = 0
         for chapter in chapters:
-            likes += len(chapter.get_likes())
+            likes += chapter.get_likes().count()
         return likes
 
     def __str__(self):
