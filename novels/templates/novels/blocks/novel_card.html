@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="novel-card-cover-overlay-content">
-                    <small class="novel-card-cover-overlay-description"> {{ novel.description|truncatechars:200|safe }} </small>
+                    <small class="novel-card-cover-overlay-description"> {% autoescape on %}{{ novel.description|truncatechars:200|safe }}{% endautoescape %} </small>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ from .managers import PublicNovelsManager
 class Comment(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     chapter = models.ForeignKey('Chapter', on_delete=models.CASCADE)
-    content = RichTextField()
+    content = models.TextField(blank=True, null=True)
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -31,7 +31,7 @@ class Like(models.Model):
 
 class Chapter(models.Model):
     title = models.CharField(max_length=100)
-    content = RichTextField()
+    content = models.TextField(blank=True, null=True)
     created_at = models.DateField(auto_now_add=True)
     publication_date = models.DateField(blank=True, null=True)
     reads = models.PositiveIntegerField(default=0)
@@ -63,7 +63,7 @@ class Novel(models.Model):
         ("Romance", "Romance"),
     ]
     title = models.CharField(max_length=100)
-    description = RichTextField()
+    description = models.TextField(blank=True, null=True)
     cover = models.ImageField(upload_to='novel_covers',
                               default='novel_covers/default.png')
     created_at = models.DateTimeField(auto_now_add=True)
