@@ -193,8 +193,15 @@ section{
 }
 
 .novel-card-cover-overlay-content{
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     margin: 5px;
+}
+
+.novel-card-cover-overlay-content p{
+    color: white;
+    font-size: 12px;
+    margin-bottom: 10px;
 }
 
 .novel-card-cover{
@@ -207,8 +214,9 @@ section{
 }
 
 .novel-card-cover-overlay-description{
-    color: white;
-    font-size: 12px;
+    color: white !important;
+    font-size: 12px !important;
+    margin-bottom: 10px;
 }
 
 .card-overlay-appear{

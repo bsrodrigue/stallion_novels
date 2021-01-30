@@ -3,10 +3,40 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import render
 
-from .models import Novel, Chapter, Like, Comment
+from .models import Novel, Chapter, Like, Comment, Library
 from .forms import NovelForm, ChapterForm, CommentForm
 
 import readtime
+
+def add_to_library(request, novel_id):
+    novel_to_add =  Novel.objects.get(pk=novel_id)
+    library = Library.objects.filter(owner=request.user.id)[0]
+    library.novels.add(novel_to_add)
+    library.save()
+    return HttpResponseRedirect(reverse_lazy('my_library'))
+
+def remove_from_library(request, novel_id):
+    novel_to_remove =  Novel.objects.get(pk=novel_id)
+    library = Library.objects.filter(owner=request.user.id)[0]
+    library.novels.remove(novel_to_remove)
+    library.save()
+    return HttpResponseRedirect(reverse_lazy('my_library'))
+
+def my_library(request):
+    library = Library.objects.filter(owner=request.user.id)[0]
+    library_novels = library.novels.all()
+
+    return render(
+        request,
+        "novels/my_library.html",
+        {
+            "page_title": f"Ma Bibliothèque",
+            "library_novels": library_novels,
+            "page_hero_title": f"Ma Bibliothèque",
+            "page_hero_description": f"Gérez votre proptre bibliothèque!",
+        },
+    )
+
 
 def unlike_chapter(request, chapter_id):
     like_to_delete = Like.objects.filter(chapter=chapter_id, liker=request.user.id)[0]

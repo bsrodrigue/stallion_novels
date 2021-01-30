@@ -11,7 +11,12 @@
                     </div>
                 </div>
                 <div class="novel-card-cover-overlay-content">
-                    <small class="novel-card-cover-overlay-description"> {% autoescape on %}{{ novel.description|truncatechars:200|safe }}{% endautoescape %} </small>
+                    <p class="novel-card-cover-overlay-description"> {% autoescape on %}{{ novel.description|truncatechars:200|safe }}{% endautoescape %} </p>
+                    {% if novel.id|is_already_in_library:user.id %}
+ <a class="btn btn-dark" href="{% url 'remove_from_library' novel.id %}">Retier de la bibliothèque</a>
+                    {% else %}
+<a class="btn btn-dark" href="{% url 'add_to_library' novel.id %}">Ajouter à la bibliothèque</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

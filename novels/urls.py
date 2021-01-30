@@ -25,10 +25,17 @@ urlpatterns += [
 # Account Related
 urlpatterns += [
     path('account/my_creations', views.my_creations, name='my_creations'),
+    path('account/my_library', views.my_library, name='my_library'),
     path('preview_chapter/<int:novel_id>/<int:chapter_index>',
          views.preview_chapter, name='preview_chapter'),
     path('account/novel_dashboard/<int:novel_id>',
          views.novel_dashboard, name='novel_dashboard'),
+]
+
+# Library
+urlpatterns += [
+     path('account/add_to_library/<int:novel_id>', views.add_to_library, name='add_to_library'),
+     path('account/remove_from_library/<int:novel_id>', views.remove_from_library, name='remove_from_library'),
 ]
 
 # Novel

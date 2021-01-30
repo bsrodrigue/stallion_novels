@@ -4,6 +4,10 @@ from django.contrib.auth import get_user_model
 
 from .managers import PublicNovelsManager
 
+class Library(models.Model):
+    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    novels = models.ManyToManyField('Novel')
+
 
 class Comment(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
