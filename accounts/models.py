@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
+from novels.models import Library
 
 # class StallionUserManager(BaseUserManager):
 #     def create_user(self, username, password=None):

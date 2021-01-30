@@ -1,16 +1,17 @@
 from django.db import models
 from djrichtextfield.models import RichTextField
 from django.contrib.auth import get_user_model
+import stallion_novels.settings as settings
 
 from .managers import PublicNovelsManager
 
 class Library(models.Model):
-    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     novels = models.ManyToManyField('Novel')
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     chapter = models.ForeignKey('Chapter', on_delete=models.CASCADE)
     content = models.TextField(blank=True, null=True)
     created_at = models.DateField(auto_now_add=True)
@@ -21,7 +22,7 @@ class Comment(models.Model):
 
 class Like(models.Model):
     liker = models.ForeignKey(
-        get_user_model(),
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 
@@ -75,7 +76,7 @@ class Novel(models.Model):
     mature = models.BooleanField(default=False)
     public = models.BooleanField(default=True)
     author = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     genre = models.CharField(choices=GENRES, max_length=30, default="Inconnu")
     objects = models.Manager()
     public_novels = PublicNovelsManager()
