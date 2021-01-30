@@ -46,8 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # created apps
-
+    # Third Party Apps
+    "notifications",
+    # Created Apps
     "accounts",
     "djrichtextfield",
     "novels",

@@ -16,7 +16,6 @@ urlpatterns += [
      path('unlike_chapter/<int:chapter_id>', views.unlike_chapter, name='unlike_chapter'),
 ]
 
-
 # Comment
 urlpatterns += [
      path('comment_chapter/<int:chapter_id>', views.comment_chapter, name='comment_chapter'),
@@ -26,6 +25,7 @@ urlpatterns += [
 urlpatterns += [
     path('account/my_creations', views.my_creations, name='my_creations'),
     path('account/my_library', views.my_library, name='my_library'),
+    path('account/my_notifications', views.my_notifications, name='my_notifications'),
     path('preview_chapter/<int:novel_id>/<int:chapter_index>',
          views.preview_chapter, name='preview_chapter'),
     path('account/novel_dashboard/<int:novel_id>',

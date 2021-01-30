@@ -1,18 +1,28 @@
 from django.core.paginator import Paginator
+from django.contrib.auth import get_user_model
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import render
+
+from notifications.signals import notify
 
 from .models import Novel, Chapter, Like, Comment, Library
 from .forms import NovelForm, ChapterForm, CommentForm
 
 import readtime
 
+def my_notifications(request):
+    notifications = request.user.notifications.unread()
+    notifications_to_display = list(notifications)
+    notifications.mark_all_as_read()
+    return HttpResponse(notifications_to_display)
+
 def add_to_library(request, novel_id):
     novel_to_add =  Novel.objects.get(pk=novel_id)
     library = Library.objects.filter(owner=request.user.id)[0]
     library.novels.add(novel_to_add)
     library.save()
+
     return HttpResponseRedirect(reverse_lazy('my_library'))
 
 def remove_from_library(request, novel_id):
@@ -37,21 +47,40 @@ def my_library(request):
         },
     )
 
+def comment_chapter(request, chapter_id):
+    chapter = Chapter.objects.get(pk=chapter_id)
+    new_comment = Comment()
+    new_comment.author = request.user
+    new_comment.chapter = chapter
+
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment.content = form.cleaned_data['content']
+        new_comment.save()
+        author = chapter.novel.author
+        notify.send(author, recipient=author, verb=f'{request.user} a commenté votre chapitre {chapter.title} de votre roman {chapter.novel.title}')
+        return HttpResponseRedirect(reverse_lazy('home'))
+    else:
+        return HttpResponse('Error while commenting')
+
 
 def unlike_chapter(request, chapter_id):
-    like_to_delete = Like.objects.filter(chapter=chapter_id, liker=request.user.id)[0]
+    chapter = Chapter.objects.get(pk=chapter_id)
+    like_to_delete = Like.objects.filter(chapter=chapter.id, liker=request.user.id)[0]
     like_to_delete.delete()
+    author = chapter.novel.author
+    notify.send(author, recipient=author, verb=f'{request.user} n\'aime plus votre chapitre {chapter.title} de votre roman {chapter.novel.title}')
     return HttpResponseRedirect(reverse_lazy('home'))
 
 
 def like_chapter(request, chapter_id):
     chapter = Chapter.objects.get(pk=chapter_id)
-
     new_like = Like()
     new_like.liker = request.user
     new_like.chapter = chapter
     new_like.save()
-
+    author = chapter.novel.author
+    notify.send(author, recipient=author, verb=f'{request.user} a aimé votre chapitre {chapter.title} de votre roman {chapter.novel.title}')
     return HttpResponseRedirect(reverse_lazy('home'))
 
 
@@ -292,20 +321,6 @@ def preview_chapter(request, novel_id, chapter_index):
             "page_hero_description": f"Bonne lecture",
         },
     )
-
-def comment_chapter(request, chapter_id):
-    chapter = Chapter.objects.get(pk=chapter_id)
-    new_comment = Comment()
-    new_comment.author = request.user
-    new_comment.chapter = chapter
-
-    form = CommentForm(request.POST)
-    if form.is_valid():
-        new_comment.content = form.cleaned_data['content']
-        new_comment.save()
-        return HttpResponseRedirect(reverse_lazy('home'))
-    else:
-        return HttpResponse('Error while commenting')
     
 
 def chapter(request, novel_id, chapter_index):

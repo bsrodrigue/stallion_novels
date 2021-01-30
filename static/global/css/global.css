@@ -76,10 +76,6 @@ hr{
     background: var(--main-color) !important;
 }
 
-.navbar .dropdown *{
-    background: var(--main-color) !important;
-}
-
 .navbar *{
     font-family: 'Quicksand', sans-serif !important;
     color: white !important;
@@ -90,17 +86,28 @@ hr{
 }
 
 .dropdown-menu{
+    background: var(--main-color) !important;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.dropdown-menu a, span{
+    color: white;
+}
+
+.badge{
+    background: var(--secondary-color);
 }
 
 .dropdown-item{
     transition: all 0.6s ease-out;
     background: none;
+    
 }
 
 .dropdown-item:hover{
     background: #ff4301 !important;
-    transition: all 0.6s ease-out;
+    color: white;
+    transition: background 0.6s ease-out;
 }
 
 .search-bar-input{
@@ -347,6 +354,7 @@ footer .container{
 }
 
 @media(max-width: 576px){
+
     .novel-card-cover{
         height: 175px;
         width: 100%;
