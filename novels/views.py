@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 from notifications.signals import notify
 
-from .models import Novel, Chapter, Like, Comment, Library
+from .models import Novel, Chapter, Like, Comment
 from .forms import NovelForm, ChapterForm, CommentForm
 
 import readtime
@@ -19,22 +19,17 @@ def my_notifications(request):
 
 def add_to_library(request, novel_id):
     novel_to_add =  Novel.objects.get(pk=novel_id)
-    library = Library.objects.filter(owner=request.user.id)[0]
-    library.novels.add(novel_to_add)
-    library.save()
+    request.user.library.add(novel_to_add)
 
     return HttpResponseRedirect(reverse_lazy('my_library'))
 
 def remove_from_library(request, novel_id):
     novel_to_remove =  Novel.objects.get(pk=novel_id)
-    library = Library.objects.filter(owner=request.user.id)[0]
-    library.novels.remove(novel_to_remove)
-    library.save()
+    request.user.library.remove(novel_to_remove)
     return HttpResponseRedirect(reverse_lazy('my_library'))
-
+  
 def my_library(request):
-    library = Library.objects.filter(owner=request.user.id)[0]
-    library_novels = library.novels.all()
+    library_novels = request.user.library.all()
 
     return render(
         request,
@@ -46,7 +41,7 @@ def my_library(request):
             "page_hero_description": f"Gérez votre proptre bibliothèque!",
         },
     )
-
+    
 def comment_chapter(request, chapter_id):
     chapter = Chapter.objects.get(pk=chapter_id)
     new_comment = Comment()

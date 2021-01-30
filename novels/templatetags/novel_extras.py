@@ -1,15 +1,14 @@
 from django import template
 register = template.Library()
 
-from novels.models import Novel, Chapter, Like, Library
+from novels.models import Novel, Chapter, Like
 from django.contrib.auth import get_user_model
 
 
 @register.filter(name='is_already_in_library')
 def is_already_in_library(novelId, userId):
-    # novel = Novel.objects.get(pk=novelId)
-    library = Library.objects.filter(owner=userId)[0]
-    return library.novels.filter(pk=novelId).exists()
+    user = get_user_model().objects.get(pk=userId)
+    return user.library.filter(pk=novelId).exists()
 
 @register.filter(name='is_my_novel')
 def is_my_novel(novelId, userId):

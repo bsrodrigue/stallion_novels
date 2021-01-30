@@ -5,11 +5,6 @@ import stallion_novels.settings as settings
 
 from .managers import PublicNovelsManager
 
-class Library(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    novels = models.ManyToManyField('Novel')
-
-
 class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     chapter = models.ForeignKey('Chapter', on_delete=models.CASCADE)
