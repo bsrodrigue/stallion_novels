@@ -95,6 +95,7 @@ hr{
 
 .dropdown-item{
     transition: all 0.6s ease-out;
+    background: none;
 }
 
 .dropdown-item:hover{
@@ -112,7 +113,6 @@ hr{
 .search-bar-submit{
     border: 2px solid var(--secondary-color) !important;
     border-radius: 5px !important;
-    font-weight: bold;
 }
 
 .search-bar-submit:hover{
